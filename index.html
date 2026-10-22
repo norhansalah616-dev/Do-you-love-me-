@@ -1,218 +1,1435 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Do You Love Me? 💖</title>
-  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700;900&family=Fredoka:wght@500;700&display=swap" rel="stylesheet" />
-  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
-  <style>
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-    body {
-      background: radial-gradient(circle at center, #ffe6f0, #ffd1dc, #ffb6c1);
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      font-family: 'Cairo', 'Fredoka', sans-serif;
-      overflow-x: hidden;
-      user-select: none;
-    }
-    .heart-trail {
-      position: fixed;
-      pointer-events: none;
-      font-size: 1.2rem;
-      animation: floatUp 1.2s ease-out forwards;
-      z-index: 9999;
-    }
-    @keyframes floatUp {
-      0% { opacity: 1; transform: translate(0, 0) scale(1); }
-      100% { opacity: 0; transform: translate(0, -60px) scale(0.3); }
-    }
-    .card {
-      background: rgba(255, 255, 255, 0.95);
-      border: 4px solid #ff7597;
-      border-radius: 28px;
-      padding: 30px;
-      width: 90%;
-      max-width: 440px;
-      text-align: center;
-      box-shadow: 0 15px 35px rgba(255, 105, 145, 0.25);
-      position: relative;
-    }
-    .bears-img { width: 180px; height: 140px; margin: 0 auto 15px; }
-    h1 { color: #d81b60; font-size: 1.8rem; margin-bottom: 20px; font-weight: 900; }
-    .btn-container {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      gap: 20px;
-      min-height: 90px;
-      position: relative;
-    }
-    .btn {
-      padding: 12px 34px;
-      border: none;
-      border-radius: 50px;
-      font-size: 1.2rem;
-      font-weight: bold;
-      cursor: pointer;
-      box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
-      transition: transform 0.15s ease;
-    }
-    .btn-yes { background: #ff4081; color: white; }
-    .btn-yes:hover { transform: scale(1.1); }
-    .btn-no {
-      background: #757575;
-      color: white;
-      position: relative;
-      transition: all 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
-    }
-    .hidden { display: none !important; }
-    textarea {
-      width: 100%;
-      padding: 12px;
-      border: 2px solid #ff80ab;
-      border-radius: 14px;
-      font-family: inherit;
-      margin-top: 15px;
-      resize: none;
-      height: 80px;
-    }
-    .submit-btn {
-      background: #4caf50;
-      color: white;
-      border: none;
-      padding: 10px 24px;
-      border-radius: 30px;
-      font-weight: bold;
-      margin-top: 10px;
-      cursor: pointer;
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Do You Love Me? ❤️ بتحبني؟</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts: Cairo & Fredoka -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&family=Fredoka:wght@500;700&display=swap" rel="stylesheet">
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'love-pink': '#ff7597',
+                        'love-deep': '#ff3366',
+                        'love-light': '#ffe8ee',
+                        'love-peach': '#ffcca7',
+                        'love-bg': '#fff0f4',
+                    },
+                    fontFamily: {
+                        cairo: ['Cairo', 'sans-serif'],
+                        fredoka: ['Fredoka', 'Cairo', 'cursive', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        * {
+            box-sizing: border-box;
+            user-select: none;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        body {
+            font-family: 'Cairo', 'Fredoka', sans-serif;
+            background: linear-gradient(135deg, #fff0f3 0%, #ffd6e0 50%, #ffe5ec 100%);
+            min-height: 100vh;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        /* Ambient floating hearts */
+        .ambient-heart {
+            position: fixed;
+            pointer-events: none;
+            animation: floatUpward linear infinite;
+            z-index: 1;
+            opacity: 0.65;
+        }
+
+        @keyframes floatUpward {
+            0% {
+                transform: translateY(105vh) scale(0.6) rotate(0deg);
+                opacity: 0;
+            }
+            15% { opacity: 0.75; }
+            85% { opacity: 0.75; }
+            100% {
+                transform: translateY(-10vh) scale(1.15) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
+        /* Cute mascot pulse and wiggle animations */
+        @keyframes gentlePulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+
+        .pulse-gentle {
+            animation: gentlePulse 2.4s ease-in-out infinite;
+        }
+
+        @keyframes earWiggle {
+            0%, 100% { transform: rotate(0deg); }
+            20% { transform: rotate(-8deg); }
+            40% { transform: rotate(8deg); }
+            60% { transform: rotate(0deg); }
+        }
+
+        .ear-wiggle {
+            animation: earWiggle 4s ease-in-out infinite;
+            transform-origin: bottom center;
+        }
+
+        /* Canvases */
+        #cursorCanvas, #confettiCanvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+        }
+
+        #cursorCanvas { z-index: 35; }
+        #confettiCanvas { z-index: 70; }
+
+        /* Glassmorphism style card */
+        .glass-card {
+            background: rgba(255, 255, 255, 0.88);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 2px solid rgba(255, 255, 255, 0.95);
+            box-shadow: 0 20px 45px -10px rgba(255, 117, 151, 0.28), 0 0 20px rgba(255, 182, 193, 0.25);
+        }
+
+        /* Smooth dodge transition */
+        .dodge-btn {
+            transition: transform 0.16s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+    </style>
 </head>
-<body>
+<body class="flex flex-col items-center justify-center min-h-screen p-4 text-slate-800">
 
-  <div class="card" id="mainCard">
-    <div class="bears-img">
-      <!-- رسوم كرتونية Bubu & Dudu -->
-      <svg viewBox="0 0 200 150" width="100%" height="100%">
-        <circle cx="70" cy="80" r="45" fill="#a0603e" />
-        <circle cx="45" cy="45" r="15" fill="#a0603e" />
-        <circle cx="95" cy="45" r="15" fill="#a0603e" />
-        <circle cx="60" cy="75" r="5" fill="#000" />
-        <circle cx="80" cy="75" r="5" fill="#000" />
-        
-        <circle cx="130" cy="80" r="43" fill="#ffffff" stroke="#eee" />
-        <circle cx="108" cy="48" r="13" fill="#333" />
-        <circle cx="152" cy="48" r="13" fill="#333" />
-        <ellipse cx="120" cy="75" rx="5" ry="6" fill="#333" />
-        <ellipse cx="140" cy="75" rx="5" ry="6" fill="#333" />
-        <path d="M 95 65 Q 100 55 105 65 A 6 6 0 0 1 115 65 Q 115 75 100 85 Q 85 75 85 65 A 6 6 0 0 1 95 65 Z" fill="#ff4081" />
-      </svg>
+    <!-- Trail & Confetti Overlay Canvases -->
+    <canvas id="cursorCanvas"></canvas>
+    <canvas id="confettiCanvas"></canvas>
+
+    <!-- Ambient Floating Hearts Container -->
+    <div id="ambientHeartsContainer" class="fixed inset-0 pointer-events-none z-0 overflow-hidden"></div>
+
+    <!-- Top Action Bar (Admin & Audio Controls) -->
+    <header class="fixed top-4 left-4 right-4 max-w-4xl mx-auto flex justify-between items-center z-50 px-2 pointer-events-auto">
+        <!-- Audio Synthesizer Toggle -->
+        <button id="soundToggleBtn" onclick="window.toggleAudio()" class="flex items-center gap-1.5 bg-white/90 hover:bg-white text-love-deep px-3 py-1.5 rounded-full shadow-md text-xs sm:text-sm font-bold transition border border-pink-100 active:scale-95">
+            <span id="soundIcon">🔊</span>
+            <span id="soundText" class="hidden sm:inline">الصوت مفعّل</span>
+        </button>
+
+        <!-- Admin / Tracking Dashboard Launcher (Hidden by default for visitors) -->
+        <button id="adminLauncherBtn" onclick="window.openAdminModal()" class="hidden items-center gap-2 bg-gradient-to-r from-rose-500 to-pink-500 hover:from-rose-600 hover:to-pink-600 text-white px-3.5 py-1.5 rounded-full shadow-md text-xs sm:text-sm font-black transition transform hover:scale-105 active:scale-95 border-2 border-white">
+            <span>💌</span>
+            <span>لوحة التحكم والتتبع</span>
+            <span id="unreadCountBadge" class="hidden bg-white text-rose-600 px-1.5 py-0.2 rounded-full text-[11px] font-black">0</span>
+        </button>
+    </header>
+
+    <!-- Main Interactive Card -->
+    <main class="relative z-10 w-full max-w-md mx-auto my-auto pt-10 pb-6">
+
+        <!-- ================= QUESTION SCREEN ================= -->
+        <div id="questionScreen" class="glass-card rounded-3xl p-6 sm:p-8 text-center transition-all duration-500 relative">
+            
+            <!-- Target Personalized Banner (Shown when URL parameters exist) -->
+            <div id="personalizedBadge" class="hidden mb-3 inline-flex items-center gap-1 bg-gradient-to-r from-pink-100 to-rose-100 text-rose-700 border border-pink-300 px-4 py-1.5 rounded-full text-xs sm:text-sm font-bold shadow-sm animate-bounce">
+                <span>✨</span>
+                <span>رسالة خاصة موجهة إلى: </span>
+                <span id="targetNameDisplay" class="font-black text-rose-600 underline"></span>
+                <span>✨</span>
+            </div>
+
+            <!-- Bubu & Dudu Mascot Illustration (SVG) with Secret Tap (Easter Egg) -->
+            <div id="mascotDefault" onclick="window.handleSecretTap(event)" title="Bubu & Dudu" class="relative w-48 h-44 sm:w-56 sm:h-48 mx-auto mb-2 flex items-center justify-center cursor-pointer select-none">
+                <svg viewBox="0 0 240 200" class="w-full h-full drop-shadow-md">
+                    <!-- Floating Love Heart -->
+                    <g class="pulse-gentle">
+                        <path d="M120 40 C 120 32, 108 22, 98 22 C 86 22, 78 31, 78 43 C 78 62, 100 78, 120 93 C 140 78, 162 62, 162 43 C 162 31, 154 22, 142 22 C 132 22, 120 32, 120 40 Z" fill="#ff4d79"/>
+                        <path d="M100 30 C 96 30, 93 33, 93 37" stroke="#ffffff" stroke-width="2.2" stroke-linecap="round" fill="none"/>
+                    </g>
+
+                    <!-- Brown Bear: Bubu (Left) -->
+                    <g id="bubuCharacter">
+                        <!-- Ears -->
+                        <circle cx="65" cy="95" r="16" fill="#b07851" class="ear-wiggle"/>
+                        <circle cx="65" cy="95" r="9" fill="#8d5b38"/>
+                        <circle cx="115" cy="95" r="16" fill="#b07851" class="ear-wiggle"/>
+                        <circle cx="115" cy="95" r="9" fill="#8d5b38"/>
+                        <!-- Head -->
+                        <ellipse cx="90" cy="125" rx="36" ry="32" fill="#c48a60"/>
+                        <!-- Blush -->
+                        <ellipse cx="70" cy="133" rx="7" ry="4" fill="#ff99aa" opacity="0.85"/>
+                        <ellipse cx="110" cy="133" rx="7" ry="4" fill="#ff99aa" opacity="0.85"/>
+                        <!-- Eyes -->
+                        <circle cx="78" cy="123" r="3.5" fill="#3a2312"/>
+                        <circle cx="102" cy="123" r="3.5" fill="#3a2312"/>
+                        <circle cx="77" cy="122" r="1" fill="#ffffff"/>
+                        <circle cx="101" cy="122" r="1" fill="#ffffff"/>
+                        <!-- Snout -->
+                        <ellipse cx="90" cy="132" rx="10" ry="7" fill="#ebd2be"/>
+                        <polygon points="87,130 93,130 90,134" fill="#3a2312"/>
+                        <path d="M86 134 Q90 138 94 134" stroke="#3a2312" stroke-width="1.8" stroke-linecap="round" fill="none"/>
+                        <!-- Paws -->
+                        <ellipse cx="78" cy="155" rx="8" ry="10" fill="#b07851"/>
+                        <ellipse cx="102" cy="155" rx="8" ry="10" fill="#b07851"/>
+                    </g>
+
+                    <!-- White Panda: Dudu (Right) -->
+                    <g id="duduCharacter">
+                        <!-- Ears -->
+                        <circle cx="130" cy="95" r="15" fill="#313137" class="ear-wiggle"/>
+                        <circle cx="130" cy="95" r="8" fill="#4d4d54"/>
+                        <circle cx="178" cy="95" r="15" fill="#313137" class="ear-wiggle"/>
+                        <circle cx="178" cy="95" r="8" fill="#4d4d54"/>
+                        <!-- Head -->
+                        <ellipse cx="154" cy="125" rx="36" ry="32" fill="#ffffff" stroke="#f0e6eb" stroke-width="1.5"/>
+                        <!-- Panda Eye Patches -->
+                        <ellipse cx="142" cy="124" rx="7.5" ry="9" fill="#313137" transform="rotate(-15 142 124)"/>
+                        <ellipse cx="166" cy="124" rx="7.5" ry="9" fill="#313137" transform="rotate(15 166 124)"/>
+                        <!-- Eyes sparkles -->
+                        <circle cx="143" cy="123" r="2.8" fill="#ffffff"/>
+                        <circle cx="165" cy="123" r="2.8" fill="#ffffff"/>
+                        <!-- Blush -->
+                        <ellipse cx="134" cy="134" rx="7" ry="4" fill="#ff94b0" opacity="0.85"/>
+                        <ellipse cx="174" cy="134" rx="7" ry="4" fill="#ff94b0" opacity="0.85"/>
+                        <!-- Nose & Mouth -->
+                        <ellipse cx="154" cy="131" rx="4" ry="2.5" fill="#313137"/>
+                        <path d="M151 134 Q154 137 157 134" stroke="#313137" stroke-width="1.6" stroke-linecap="round" fill="none"/>
+                        <!-- Paws -->
+                        <ellipse cx="138" cy="154" rx="7.5" ry="9" fill="#313137"/>
+                        <ellipse cx="168" cy="154" rx="7.5" ry="9" fill="#313137"/>
+                    </g>
+                </svg>
+            </div>
+
+            <!-- Question Headings (with Secret Tap on title) -->
+            <h1 id="questionTitle" onclick="window.handleSecretTap(event)" class="text-2xl sm:text-3xl font-black text-rose-600 mb-1 leading-snug cursor-pointer select-none">
+                Do you love me? 🥺❤️
+            </h1>
+            <p id="questionSubtitle" class="text-gray-600 text-sm sm:text-base font-semibold mb-6">
+                بتحبني بجد؟ جاوب/ي بصراحة ومتهربش! 😉
+            </p>
+
+            <!-- Buttons Arena Container -->
+            <div id="buttonArena" class="relative w-full h-32 flex items-center justify-center gap-6 overflow-visible">
+                <!-- YES BUTTON -->
+                <button id="yesBtn" onclick="window.handleYesClick()" class="z-20 px-8 py-3.5 bg-gradient-to-r from-rose-500 to-pink-500 hover:from-rose-600 hover:to-pink-600 text-white font-black text-lg sm:text-xl rounded-full shadow-lg hover:shadow-pink-300/70 transform hover:scale-110 active:scale-95 transition-all duration-200 border-2 border-white flex items-center gap-2">
+                    <span>نعم، بحبك! 🥰</span>
+                    <span class="text-xs font-normal opacity-90">(Yes!)</span>
+                </button>
+
+                <!-- NO BUTTON (DODGES ON TOUCH & HOVER) -->
+                <button id="noBtn" class="dodge-btn z-30 px-6 py-3 bg-gray-200 hover:bg-gray-300 text-gray-700 font-bold text-base sm:text-lg rounded-full shadow-md border border-gray-300 cursor-pointer">
+                    <span id="noBtnText">لا 💔</span>
+                </button>
+            </div>
+
+            <!-- Teasing Status Hint -->
+            <p id="teaseHint" class="text-xs sm:text-sm text-rose-400 font-semibold mt-4 h-6 transition-all duration-300">
+                جرب تدوس على "لا" وشوف هتعرف ولا لأ! 😜
+            </p>
+        </div>
+
+        <!-- ================= CELEBRATION / SUCCESS SCREEN ================= -->
+        <div id="successScreen" class="hidden glass-card rounded-3xl p-6 sm:p-8 text-center transition-all duration-500 transform scale-95 opacity-0">
+            <!-- Mascot Hugging Couple (SVG) -->
+            <div class="relative w-48 h-44 sm:w-56 sm:h-48 mx-auto mb-3 flex items-center justify-center">
+                <svg viewBox="0 0 240 200" class="w-full h-full drop-shadow-lg">
+                    <!-- Glowing Heart Background -->
+                    <path d="M120 25 C 120 10, 95 -5, 75 -5 C 45 -5, 25 18, 25 50 C 25 95, 80 135, 120 170 C 160 135, 215 95, 215 50 C 215 18, 195 -5, 165 -5 C 145 -5, 120 10, 120 25 Z" fill="#ffd1dc" opacity="0.6"/>
+                    <!-- Hugging Bubu and Dudu -->
+                    <g id="huggingPair">
+                        <ellipse cx="95" cy="120" rx="35" ry="32" fill="#c48a60"/>
+                        <circle cx="75" cy="95" r="14" fill="#b07851"/>
+                        <circle cx="112" cy="95" r="14" fill="#b07851"/>
+                        <path d="M80 115 Q86 110 92 115" stroke="#3a2312" stroke-width="2.5" stroke-linecap="round" fill="none"/>
+                        <ellipse cx="145" cy="120" rx="35" ry="32" fill="#ffffff" stroke="#f0e6eb"/>
+                        <circle cx="130" cy="95" r="14" fill="#313137"/>
+                        <circle cx="165" cy="95" r="14" fill="#313137"/>
+                        <path d="M140 115 Q146 110 152 115" stroke="#313137" stroke-width="2.5" stroke-linecap="round" fill="none"/>
+                        <!-- Blush -->
+                        <ellipse cx="78" cy="125" rx="7" ry="4" fill="#ff8099"/>
+                        <ellipse cx="154" cy="125" rx="7" ry="4" fill="#ff8099"/>
+                        <!-- Heart between them -->
+                        <path d="M120 75 C 120 70, 114 64, 107 64 C 98 64, 92 70, 92 78 C 92 91, 107 101, 120 111 C 133 101, 148 91, 148 78 C 148 70, 142 64, 133 64 C 126 64, 120 70, 120 75 Z" fill="#ff2e63"/>
+                    </g>
+                </svg>
+            </div>
+
+            <h2 class="text-3xl sm:text-4xl font-black text-rose-600 mb-2">
+                كنت عارف(ة)! 🥰❤️
+            </h2>
+            <p class="text-base sm:text-lg font-bold text-gray-700 mb-6">
+                Yaaay! I knew you loved me! 🎉💖
+            </p>
+
+            <!-- Status Confirmation Box -->
+            <div class="bg-rose-50 border border-rose-200 rounded-2xl p-4 text-right mb-5 shadow-inner">
+                <div class="flex items-center gap-2 mb-1 text-rose-700 font-bold text-sm">
+                    <span>💌</span>
+                    <span>تم تسجيل اعترافك بنجاح!</span>
+                </div>
+                <p id="recordedNoteText" class="text-xs text-gray-600 leading-relaxed">
+                    تم تسجيل اختيارك "نعم بحبك" وإرساله لصاحب الرابط مباشرة! 🥰
+                </p>
+
+                <!-- Optional sweet reply note -->
+                <div class="mt-3">
+                    <label class="block text-xs font-bold text-gray-700 mb-1">اكتب/ي كلمة حلوة تفرح القلب (اختياري):</label>
+                    <textarea id="optionalSweetNote" rows="2" placeholder="بحبك من كل قلبي... ❤️" class="w-full text-xs p-2.5 rounded-xl border border-pink-200 focus:outline-none focus:ring-2 focus:ring-rose-400 bg-white"></textarea>
+                    <button id="saveNoteBtn" onclick="window.saveSweetNote()" class="w-full mt-2 py-2 bg-rose-500 hover:bg-rose-600 text-white font-bold text-xs rounded-xl shadow transition">
+                        حفظ وإرسال الرسالة ✨
+                    </button>
+                    <span id="noteSavedStatus" class="hidden text-center block text-[11px] font-bold text-emerald-600 mt-1">تم إرسال رسالتك بحب وحفظها في السجل! 💖</span>
+                </div>
+            </div>
+
+            <!-- Quick WhatsApp Share & Replay Buttons -->
+            <div class="flex flex-col sm:flex-row gap-2 justify-center">
+                <button onclick="window.sendWhatsAppConfirmation()" class="flex-1 py-2.5 px-4 bg-emerald-500 hover:bg-emerald-600 text-white font-bold text-xs sm:text-sm rounded-xl shadow transition flex items-center justify-center gap-1.5">
+                    <span>📲</span>
+                    <span>إرسال اعترافي عبر واتساب</span>
+                </button>
+                <button onclick="window.replayInteraction()" class="py-2.5 px-4 bg-gray-100 hover:bg-gray-200 text-gray-700 font-semibold text-xs sm:text-sm rounded-xl transition">
+                    🔄 تجربة من جديد
+                </button>
+            </div>
+        </div>
+
+    </main>
+
+    <!-- ================= SECRET PIN ENTRY MODAL (EASTER EGG) ================= -->
+    <div id="pinModal" class="fixed inset-0 bg-black/60 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
+        <div class="bg-white rounded-3xl max-w-sm w-full p-6 shadow-2xl border-2 border-pink-200 text-center animate-in fade-in duration-200">
+            <div class="w-14 h-14 bg-pink-100 text-rose-600 rounded-full flex items-center justify-center mx-auto mb-3 text-2xl shadow-inner">
+                🔐
+            </div>
+            <h3 class="text-lg font-black text-gray-800 mb-1">المنطقة السرية للآدمن</h3>
+            <p class="text-xs text-gray-500 mb-4 font-semibold">أدخل رمز PIN للدخول إلى لوحة التحكم والتتبع</p>
+
+            <form onsubmit="window.submitPinCheck(event)" class="space-y-3">
+                <div>
+                    <input id="inputAdminPin" type="password" maxlength="8" placeholder="الرمز الافتراضي: 1234" class="w-full text-center tracking-widest text-lg font-mono px-4 py-2.5 rounded-xl border-2 border-pink-200 focus:ring-2 focus:ring-rose-400 focus:outline-none bg-rose-50/40" autocomplete="off">
+                </div>
+                <div id="pinErrorMsg" class="hidden text-xs font-bold text-rose-600 py-1">
+                    ❌ الرمز السري غير صحيح، حاول مرة أخرى!
+                </div>
+                <div class="flex gap-2 pt-1">
+                    <button type="submit" class="flex-1 py-2.5 bg-gradient-to-r from-rose-500 to-pink-500 hover:from-rose-600 hover:to-pink-600 text-white font-bold rounded-xl shadow text-xs transition">
+                        دخول 🔓
+                    </button>
+                    <button type="button" onclick="window.closePinModal()" class="px-4 py-2.5 bg-gray-100 hover:bg-gray-200 text-gray-600 font-bold rounded-xl text-xs transition">
+                        إلغاء
+                    </button>
+                </div>
+            </form>
+        </div>
     </div>
 
-    <h1 id="questionText">Do You Love Me? 🥺❤️</h1>
+    <!-- ================= ADMIN & VISITOR TRACKING MODAL ================= -->
+    <div id="adminModal" class="fixed inset-0 bg-black/60 backdrop-blur-sm z-50 hidden flex items-center justify-center p-3 sm:p-4">
+        <div class="bg-white rounded-3xl max-w-xl w-full max-h-[92vh] overflow-hidden flex flex-col shadow-2xl border-2 border-pink-200 animate-in fade-in duration-200">
+            
+            <!-- Modal Header -->
+            <div class="bg-gradient-to-r from-rose-500 via-pink-500 to-rose-600 text-white p-4 flex justify-between items-center shadow-sm">
+                <div class="flex items-center gap-2">
+                    <span class="text-2xl">💌</span>
+                    <div>
+                        <h3 class="font-black text-base sm:text-lg leading-tight">لوحة التحكم وتتبع الزوار (خاصة بك)</h3>
+                        <p class="text-[11px] text-pink-100">سجل الإجابات والرسائل ومزامنة الإكسل</p>
+                    </div>
+                </div>
+                <div class="flex items-center gap-2">
+                    <button onclick="window.lockAndHideAdmin()" title="قفل وإخفاء اللوحة فوراً" class="bg-white/20 hover:bg-white/30 text-white text-xs px-2.5 py-1 rounded-lg font-bold flex items-center gap-1 transition">
+                        <span>🔒</span>
+                        <span class="hidden sm:inline">قفل وإخفاء</span>
+                    </button>
+                    <button onclick="window.closeAdminModal()" class="text-white hover:text-pink-200 text-3xl font-bold leading-none p-1 transition">&times;</button>
+                </div>
+            </div>
 
-    <div class="btn-container" id="btnBox">
-      <button class="btn btn-yes" id="yesBtn">نعم 🥰</button>
-      <button class="btn btn-no" id="noBtn">لا 😢</button>
+            <!-- Tab Headers -->
+            <div class="flex border-b border-pink-100 bg-pink-50/60 text-xs sm:text-sm font-bold">
+                <button id="tabTrackBtn" onclick="window.switchTab('track')" class="flex-1 py-3 text-rose-600 border-b-2 border-rose-500 bg-white flex items-center justify-center gap-1.5 transition">
+                    <span>📋 السجل</span>
+                    <span id="tabCountBadge" class="bg-rose-100 text-rose-700 px-2 py-0.5 rounded-full text-[10px] font-black">0</span>
+                </button>
+                <button id="tabGenBtn" onclick="window.switchTab('gen')" class="flex-1 py-3 text-gray-500 hover:text-rose-600 border-b-2 border-transparent flex items-center justify-center gap-1.5 transition">
+                    <span>🔗 مولّد الروابط</span>
+                </button>
+                <button id="tabSheetBtn" onclick="window.switchTab('sheet')" class="flex-1 py-3 text-gray-500 hover:text-rose-600 border-b-2 border-transparent flex items-center justify-center gap-1.5 transition">
+                    <span>📊 ربط الإكسل</span>
+                </button>
+                <button id="tabPinBtn" onclick="window.switchTab('pin')" class="flex-1 py-3 text-gray-500 hover:text-rose-600 border-b-2 border-transparent flex items-center justify-center gap-1.5 transition">
+                    <span>🔐 الأمان</span>
+                </button>
+            </div>
+
+            <!-- Modal Content Area -->
+            <div class="p-4 sm:p-5 overflow-y-auto space-y-4 text-right flex-1 text-xs sm:text-sm">
+                
+                <!-- TAB 1: VISITOR TRACKING LOG -->
+                <div id="tabTrackContent" class="space-y-3">
+                    <div class="flex justify-between items-center bg-pink-50/50 p-2.5 rounded-xl border border-pink-100">
+                        <div>
+                            <span class="font-bold text-gray-700 block text-xs">التتبع المباشر للزيارات والرسائل:</span>
+                            <span id="storageModeIndicator" class="text-[10px] text-gray-500 font-mono">حالة التخزين: جاري التحقق...</span>
+                        </div>
+                        <div class="flex items-center gap-2">
+                            <button onclick="window.refreshFromSheet()" class="text-[11px] bg-rose-100 hover:bg-rose-200 text-rose-700 font-bold px-2 py-1 rounded-lg transition flex items-center gap-1">
+                                <span>🔄</span>
+                                <span>تحديث من الإكسل</span>
+                            </button>
+                            <button onclick="window.clearAllLogs()" class="text-[11px] text-rose-600 hover:text-rose-800 font-bold underline">
+                                مسح
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Visitors List -->
+                    <div id="visitorsListContainer" class="space-y-2.5">
+                        <!-- Populated by JavaScript -->
+                    </div>
+                </div>
+
+                <!-- TAB 2: CUSTOM LINK GENERATOR -->
+                <div id="tabGenContent" class="hidden space-y-3.5">
+                    <div class="bg-rose-50 border border-rose-200 rounded-xl p-3 text-xs text-rose-800 leading-relaxed">
+                        🎯 <strong>توليد رابط نظيف:</strong>
+                        <br>
+                        اكتبي اسم الشخص ورابط حسابه على فيسبوك، ثم اضغطي "توليد الرابط". الرابط الناتج يقوم تلقائياً بربط ردّه ورسالته بملف الإكسل الخاص بكِ بدون أن يرى لوحة التحكم.
+                    </div>
+
+                    <div>
+                        <label class="block font-bold text-gray-700 mb-1 text-xs">اسم الشخص الموجه له الرابط:</label>
+                        <input id="inputTargetName" type="text" placeholder="مثال: سارة، أحمد، كراشي..." class="w-full px-3.5 py-2.5 rounded-xl border border-pink-200 focus:ring-2 focus:ring-rose-400 focus:outline-none text-xs sm:text-sm bg-white">
+                    </div>
+
+                    <div>
+                        <label class="block font-bold text-gray-700 mb-1 text-xs">رابط حساب فيسبوك (أو اسم المستخدم):</label>
+                        <input id="inputTargetFb" type="text" placeholder="مثال: https://facebook.com/username أو username فقط" class="w-full px-3.5 py-2.5 rounded-xl border border-pink-200 focus:ring-2 focus:ring-rose-400 focus:outline-none text-xs sm:text-sm bg-white" dir="ltr">
+                    </div>
+
+                    <button onclick="window.generateCustomLink()" class="w-full py-3 bg-gradient-to-r from-rose-500 to-pink-500 hover:from-rose-600 hover:to-pink-600 text-white font-bold rounded-xl shadow-md transition flex items-center justify-center gap-2 active:scale-95">
+                        <span>🪄</span>
+                        <span>توليد الرابط المخصص الآن</span>
+                    </button>
+
+                    <!-- Generated Result Box -->
+                    <div id="generatedResultBox" class="hidden bg-gray-50 border border-gray-200 rounded-xl p-3.5 space-y-2.5">
+                        <span class="block text-xs font-bold text-gray-700">رابطك المخصص جاهز للمشاركة:</span>
+                        <div class="flex items-center gap-2">
+                            <input id="generatedUrlOutput" type="text" readonly class="flex-1 bg-white border border-gray-300 px-3 py-2 text-xs rounded-lg text-gray-800 select-all" dir="ltr">
+                            <button onclick="window.copyGeneratedUrl()" class="bg-rose-600 hover:bg-rose-700 text-white text-xs px-3.5 py-2 rounded-lg font-bold transition flex items-center gap-1">
+                                <span>📋</span>
+                                <span>نسخ</span>
+                            </button>
+                        </div>
+                        <div id="copyToastMessage" class="hidden text-xs font-bold text-emerald-600 flex items-center gap-1">
+                            <span>✅</span>
+                            <span>تم نسخ الرابط للحافظة! شاركيه معه الآن.</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- TAB 3: GOOGLE SHEETS SETUP -->
+                <div id="tabSheetContent" class="hidden space-y-3.5">
+                    <div class="bg-emerald-50 border border-emerald-200 rounded-xl p-3 text-xs text-emerald-800 leading-relaxed">
+                        📊 <strong>ربط شيت الإكسل (Google Sheets) لاستقبال الرسائل:</strong>
+                        <br>
+                        كل من يفتح الرابط، أو يضغط نعم، أو يكتب رسالة اعتراف ستظهر فوراً في ملف الإكسل حتى لو فتح الرابط من بلد آخر!
+                    </div>
+
+                    <div>
+                        <label class="block font-bold text-gray-700 mb-1 text-xs">رابط تطبيق الويب (Google Web App URL):</label>
+                        <input id="inputGoogleSheetUrl" type="text" placeholder="https://script.google.com/macros/s/.../exec" class="w-full px-3.5 py-2.5 rounded-xl border border-pink-200 focus:ring-2 focus:ring-rose-400 focus:outline-none text-xs bg-white font-mono" dir="ltr">
+                    </div>
+
+                    <div class="flex gap-2">
+                        <button onclick="window.saveGoogleSheetUrl()" class="flex-1 py-2 bg-rose-500 hover:bg-rose-600 text-white font-bold rounded-xl shadow transition text-xs">
+                            💾 حفظ الرابط وتفعيله
+                        </button>
+                        <button onclick="window.testSheetConnection()" class="px-4 py-2 bg-emerald-600 hover:bg-emerald-700 text-white font-bold rounded-xl shadow transition text-xs flex items-center gap-1">
+                            <span>⚡</span>
+                            <span>إرسال تجربة</span>
+                        </button>
+                    </div>
+
+                    <div id="sheetTestStatus" class="hidden text-xs font-bold py-1"></div>
+
+                    <div class="pt-2 border-t border-pink-100">
+                        <div class="flex justify-between items-center mb-1">
+                            <span class="font-bold text-gray-700 text-xs">كود سكريبت الإكسل المخصص:</span>
+                            <button onclick="window.copyAppsScriptCode()" class="text-rose-600 hover:text-rose-800 font-bold text-xs underline">
+                                📋 نسخ الكود
+                            </button>
+                        </div>
+                        <textarea id="appsScriptCodeArea" readonly rows="5" class="w-full text-[11px] p-2 rounded-xl border border-gray-200 bg-gray-50 font-mono select-all text-left" dir="ltr"></textarea>
+                        <span id="scriptCopyToast" class="hidden text-xs text-emerald-600 font-bold block mt-1">تم نسخ الكود! ضعيه في Apps Script داخل الإكسل.</span>
+                    </div>
+                </div>
+
+                <!-- TAB 4: PIN SECURITY SETTINGS -->
+                <div id="tabPinContent" class="hidden space-y-3.5">
+                    <div class="bg-pink-50 border border-pink-200 rounded-xl p-3 text-xs text-rose-800 leading-relaxed">
+                        🛡️ <strong>حماية لوحة التحكم:</strong>
+                        <br>
+                        الرمز الافتراضي هو <code>1234</code>. يتم فتح نافذة الدخول بالضغط 3 مرات متتالية وسريعة على رأس الدب والباندا.
+                    </div>
+
+                    <div>
+                        <label class="block font-bold text-gray-700 mb-1 text-xs">الرمز الحالي (Current PIN):</label>
+                        <input id="inputCurrentPin" type="password" maxlength="8" placeholder="أدخل الرمز الحالي" class="w-full px-3.5 py-2 rounded-xl border border-pink-200 focus:ring-2 focus:ring-rose-400 focus:outline-none text-xs bg-white text-center font-mono">
+                    </div>
+
+                    <div>
+                        <label class="block font-bold text-gray-700 mb-1 text-xs">الرمز السري الجديد (New PIN):</label>
+                        <input id="inputNewPin" type="password" maxlength="8" placeholder="رمز جديد (4 أرقام أو أكثر)" class="w-full px-3.5 py-2 rounded-xl border border-pink-200 focus:ring-2 focus:ring-rose-400 focus:outline-none text-xs bg-white text-center font-mono">
+                    </div>
+
+                    <div>
+                        <label class="block font-bold text-gray-700 mb-1 text-xs">تأكيد الرمز الجديد:</label>
+                        <input id="inputConfirmPin" type="password" maxlength="8" placeholder="أعد كتابة الرمز الجديد" class="w-full px-3.5 py-2 rounded-xl border border-pink-200 focus:ring-2 focus:ring-rose-400 focus:outline-none text-xs bg-white text-center font-mono">
+                    </div>
+
+                    <div id="changePinMsg" class="hidden text-xs font-bold py-1"></div>
+
+                    <button onclick="window.saveNewPin()" class="w-full py-2.5 bg-rose-500 hover:bg-rose-600 text-white font-bold rounded-xl shadow transition text-xs">
+                        💾 حفظ وتغيير الرمز السري
+                    </button>
+                </div>
+
+            </div>
+
+            <!-- Modal Footer -->
+            <div class="p-3 bg-gray-50 border-t border-gray-100 flex justify-between items-center text-xs">
+                <button onclick="window.lockAndHideAdmin()" class="text-rose-600 hover:text-rose-800 font-bold flex items-center gap-1">
+                    <span>🔒</span>
+                    <span>قفل وإخفاء اللوحة</span>
+                </button>
+                <button onclick="window.closeAdminModal()" class="px-5 py-2 bg-gray-200 hover:bg-gray-300 text-gray-700 font-bold rounded-xl transition">
+                    إغلاق
+                </button>
+            </div>
+        </div>
     </div>
 
-    <!-- شاشة إرسال الرسالة بعد الضغط على نعم -->
-    <div id="resultBox" class="hidden">
-      <h2 style="color: #ff4081; margin-bottom: 10px;">كنت متأكد(ة)! 🥰💍</h2>
-      <textarea id="visitorMsg" placeholder="اكتب(ي) رسالة أو اعتراف هنا..."></textarea>
-      <button class="submit-btn" id="sendMsgBtn">إرسال الرسالة 💌</button>
-      <p id="sentAlert" style="color: #4caf50; font-size: 0.9rem; margin-top: 8px;" class="hidden">تم استلام رسالتك بحب! ❤️</p>
-    </div>
-  </div>
+    <!-- Application Script (Pure, Robust & Sync-Enabled) -->
+    <script>
+        /* ============================================================
+           0. CONFIGURATION & CLOUD GOOGLE SHEET INTEGRATION
+           ============================================================ */
+        // يمكنكِ وضع رابط Google Apps Script هنا مباشرة بين علامتي التنصيص إذا رغبتِ:
+        let GOOGLE_SHEET_URL = "";
 
-  <script>
-    // 1. ضعي رابط Google Apps Script الخاص بكِ هنا:
-    const GOOGLE_SCRIPT_URL = "هنا_ضعي_رابط_جوجل_سكربت_الذي_ينتهي_بـ_exec";
+        const LOCAL_STORAGE_KEY = 'love_tracker_visits_backup';
+        const SHEET_STORAGE_KEY = 'love_tracker_sheet_url';
+        const ADMIN_PIN_KEY = 'love_tracker_custom_pin_v1';
 
-    const params = new URLSearchParams(window.location.search);
-    const visitorName = params.get('name') || "زائر";
-    const visitorFb = params.get('fb') || "";
+        function getActiveSheetUrl() {
+            const urlSheet = urlParams.get('s');
+            if (urlSheet) {
+                try { return decodeURIComponent(urlSheet); } catch(e) { return urlSheet; }
+            }
+            const saved = localStorage.getItem(SHEET_STORAGE_KEY);
+            if (saved && saved.trim()) return saved.trim();
+            if (GOOGLE_SHEET_URL && GOOGLE_SHEET_URL.trim()) return GOOGLE_SHEET_URL.trim();
+            return '';
+        }
 
-    if (visitorName !== "زائر") {
-      document.getElementById('questionText').innerText = `بتحبني يا ${visitorName}؟ 🥺❤️`;
+        function getStoredPin() {
+            return localStorage.getItem(ADMIN_PIN_KEY) || '1234';
+        }
+
+        /* LocalStorage helpers */
+        function getLocalVisits() {
+            try {
+                return JSON.parse(localStorage.getItem(LOCAL_STORAGE_KEY)) || [];
+            } catch (e) {
+                return [];
+            }
+        }
+
+        function saveLocalVisits(list) {
+            localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(list));
+            renderVisitorsUI(list);
+        }
+
+        /* Dispatch event to Google Sheet */
+        function sendDataToGoogleSheet(record) {
+            const sheetUrl = getActiveSheetUrl();
+            if (!sheetUrl || !sheetUrl.startsWith('http')) return;
+
+            const payload = JSON.stringify({
+                sessionId: currentSessionId,
+                targetName: record.targetName || paramName || 'زائر',
+                facebookLink: record.facebookLink || formatFbUrl(paramFb) || 'غير محدد',
+                status: record.status || 'زيارة',
+                noDodgeCount: (typeof record.noDodgeCount !== 'undefined') ? record.noDodgeCount : dodgeCount,
+                sweetNote: record.sweetNote || document.getElementById('optionalSweetNote')?.value?.trim() || ''
+            });
+
+            // Using text/plain ensures simple POST without CORS preflight failures
+            fetch(sheetUrl, {
+                method: 'POST',
+                mode: 'no-cors',
+                headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+                body: payload
+            }).catch(err => console.warn("Google Sheet sync error:", err));
+        }
+
+        /* Save or Update Visit Record */
+        function recordOrUpdateVisit(visitData, docId) {
+            const localList = getLocalVisits();
+            const existingIndex = localList.findIndex(item => item.id === docId);
+            if (existingIndex >= 0) {
+                localList[existingIndex] = { ...localList[existingIndex], ...visitData };
+            } else {
+                localList.unshift({ id: docId, ...visitData });
+            }
+            saveLocalVisits(localList);
+
+            // Send directly to Google Sheet
+            sendDataToGoogleSheet(visitData);
+        }
+
+        /* ============================================================
+           1. VISITOR SESSION & URL PARAMETERS PARSING
+           ============================================================ */
+        let currentSessionId = sessionStorage.getItem('love_visitor_session_id');
+        if (!currentSessionId) {
+            currentSessionId = 'vis_' + Date.now() + '_' + Math.floor(Math.random() * 1000);
+            sessionStorage.setItem('love_visitor_session_id', currentSessionId);
+        }
+
+        const urlParams = new URLSearchParams(window.location.search);
+        const paramName = urlParams.get('name') || urlParams.get('for') || '';
+        const paramFb = urlParams.get('fb') || '';
+
+        function formatFbUrl(rawFb) {
+            if (!rawFb) return '';
+            let cleaned = rawFb.trim();
+            if (cleaned.startsWith('http://') || cleaned.startsWith('https://')) return cleaned;
+            if (cleaned.includes('facebook.com/')) return 'https://' + cleaned;
+            return 'https://facebook.com/' + cleaned.replace(/^@/, '');
+        }
+
+        function setupVisitorPersonalization() {
+            if (paramName) {
+                document.getElementById('personalizedBadge').classList.remove('hidden');
+                document.getElementById('targetNameDisplay').innerText = paramName;
+                document.getElementById('questionTitle').innerText = `Do you love me, ${paramName}? 🥺❤️`;
+                document.getElementById('questionSubtitle').innerText = `بتحبني يا ${paramName}؟ جاوب/ي بصراحة ومتهربش! 😉`;
+            }
+
+            const now = new Date();
+            const initialRecord = {
+                targetName: paramName || 'زائر بدون اسم مخصص',
+                facebookLink: formatFbUrl(paramFb) || 'غير محدد',
+                facebookUsername: paramFb || '',
+                status: 'زار الصفحة الآن ويقرأ 👀',
+                statusCode: 'VIEWED',
+                noDodgeCount: 0,
+                timestampRaw: Date.now(),
+                visitTime: now.toLocaleDateString('ar-EG') + ' - ' + now.toLocaleTimeString('ar-EG', { hour: '2-digit', minute: '2-digit' })
+            };
+
+            recordOrUpdateVisit(initialRecord, currentSessionId);
+        }
+
+        /* ============================================================
+           2. AUDIO SYNTHESIS ENGINE (Pure Web Audio API)
+           ============================================================ */
+        let audioContext = null;
+        let isAudioMuted = false;
+
+        function getAudioContext() {
+            if (!audioContext) {
+                audioContext = new (window.AudioContext || window.webkitAudioContext)();
+            }
+            if (audioContext.state === 'suspended') {
+                audioContext.resume();
+            }
+            return audioContext;
+        }
+
+        function playPopSound() {
+            if (isAudioMuted) return;
+            try {
+                const ctx = getAudioContext();
+                const osc = ctx.createOscillator();
+                const gain = ctx.createGain();
+                
+                osc.type = 'sine';
+                osc.frequency.setValueAtTime(450 + Math.random() * 250, ctx.currentTime);
+                osc.frequency.exponentialRampToValueAtTime(850, ctx.currentTime + 0.08);
+
+                gain.gain.setValueAtTime(0.2, ctx.currentTime);
+                gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.09);
+
+                osc.connect(gain);
+                gain.connect(ctx.destination);
+
+                osc.start();
+                osc.stop(ctx.currentTime + 0.1);
+            } catch (e) {}
+        }
+
+        function playVictoryFanfare() {
+            if (isAudioMuted) return;
+            try {
+                const ctx = getAudioContext();
+                const notes = [523.25, 659.25, 783.99, 1046.50];
+                notes.forEach((freq, idx) => {
+                    const osc = ctx.createOscillator();
+                    const gain = ctx.createGain();
+                    osc.type = 'triangle';
+                    osc.frequency.setValueAtTime(freq, ctx.currentTime + idx * 0.12);
+                    gain.gain.setValueAtTime(0.3, ctx.currentTime + idx * 0.12);
+                    gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + idx * 0.12 + 0.4);
+                    osc.connect(gain);
+                    gain.connect(ctx.destination);
+                    osc.start(ctx.currentTime + idx * 0.12);
+                    osc.stop(ctx.currentTime + idx * 0.12 + 0.45);
+                });
+            } catch (e) {}
+        }
+
+        window.toggleAudio = function () {
+            isAudioMuted = !isAudioMuted;
+            document.getElementById('soundIcon').innerText = isAudioMuted ? '🔇' : '🔊';
+            document.getElementById('soundText').innerText = isAudioMuted ? 'الصوت مكتوم' : 'الصوت مفعّل';
+        };
+
+        /* ============================================================
+           3. AMBIENT BACKGROUND HEARTS
+           ============================================================ */
+        const ambientContainer = document.getElementById('ambientHeartsContainer');
+        const heartEmojis = ['💖', '💕', '💗', '💓', '✨', '🌸', '❤️'];
+
+        function spawnAmbientHeart() {
+            const el = document.createElement('div');
+            el.className = 'ambient-heart';
+            el.innerText = heartEmojis[Math.floor(Math.random() * heartEmojis.length)];
+            el.style.left = (Math.random() * 95) + 'vw';
+            el.style.fontSize = (16 + Math.random() * 22) + 'px';
+            el.style.animationDuration = (6 + Math.random() * 6) + 's';
+            ambientContainer.appendChild(el);
+
+            setTimeout(() => el.remove(), 12000);
+        }
+
+        setInterval(spawnAmbientHeart, 850);
+        for (let i = 0; i < 5; i++) spawnAmbientHeart();
+
+        /* ============================================================
+           4. HEART CURSOR TRAIL (Canvas)
+           ============================================================ */
+        const cursorCanvas = document.getElementById('cursorCanvas');
+        const cursorCtx = cursorCanvas.getContext('2d');
+        let cursorParticles = [];
+
+        function resizeCanvases() {
+            cursorCanvas.width = window.innerWidth;
+            cursorCanvas.height = window.innerHeight;
+            const confettiCanvas = document.getElementById('confettiCanvas');
+            confettiCanvas.width = window.innerWidth;
+            confettiCanvas.height = window.innerHeight;
+        }
+        window.addEventListener('resize', resizeCanvases);
+        resizeCanvases();
+
+        class TrailHeart {
+            constructor(x, y) {
+                this.x = x;
+                this.y = y;
+                this.size = Math.random() * 14 + 10;
+                this.alpha = 1;
+                this.speedX = (Math.random() - 0.5) * 2.2;
+                this.speedY = (Math.random() - 1.6) * 2.2;
+                this.color = ['#ff4d79', '#ff7597', '#ff3366', '#ffa3b8'][Math.floor(Math.random() * 4)];
+            }
+            update() {
+                this.x += this.speedX;
+                this.y += this.speedY;
+                this.alpha -= 0.024;
+            }
+            draw(ctx) {
+                ctx.save();
+                ctx.globalAlpha = Math.max(this.alpha, 0);
+                ctx.fillStyle = this.color;
+                ctx.translate(this.x, this.y);
+                ctx.beginPath();
+                const d = this.size / 2;
+                ctx.moveTo(0, d / 4);
+                ctx.quadraticCurveTo(0, -d / 2, -d / 2, -d / 2);
+                ctx.quadraticCurveTo(-d, -d / 2, -d, d / 4);
+                ctx.quadraticCurveTo(-d, d, 0, d * 1.5);
+                ctx.quadraticCurveTo(d, d, d, d / 4);
+                ctx.quadraticCurveTo(d, -d / 2, d / 2, -d / 2);
+                ctx.quadraticCurveTo(0, -d / 2, 0, d / 4);
+                ctx.fill();
+                ctx.restore();
+            }
+        }
+
+        function addTrailParticles(x, y) {
+            for (let i = 0; i < 2; i++) {
+                cursorParticles.push(new TrailHeart(x, y));
+            }
+        }
+
+        window.addEventListener('mousemove', (e) => addTrailParticles(e.clientX, e.clientY));
+        window.addEventListener('touchmove', (e) => {
+            if (e.touches.length > 0) {
+                addTrailParticles(e.touches[0].clientX, e.touches[0].clientY);
+            }
+        }, { passive: true });
+
+        function animateCursorTrail() {
+            cursorCtx.clearRect(0, 0, cursorCanvas.width, cursorCanvas.height);
+            for (let i = 0; i < cursorParticles.length; i++) {
+                cursorParticles[i].update();
+                cursorParticles[i].draw(cursorCtx);
+                if (cursorParticles[i].alpha <= 0) {
+                    cursorParticles.splice(i, 1);
+                    i--;
+                }
+            }
+            requestAnimationFrame(animateCursorTrail);
+        }
+        animateCursorTrail();
+
+        /* ============================================================
+           5. "NO" BUTTON DODGE & RUNAWAY BEHAVIOR
+           ============================================================ */
+        const noBtn = document.getElementById('noBtn');
+        const noBtnText = document.getElementById('noBtnText');
+        const teaseHint = document.getElementById('teaseHint');
+        let dodgeCount = 0;
+
+        const runawayPhrases = [
+            "لا 💔",
+            "متأكد؟ 🥺",
+            "طب فكر تاني! 🤔",
+            "مش هتعرف تدوسني 😂",
+            "الزرار بيهرب هههه 🙈",
+            "مفيش هروب! 💖",
+            "قلبك مش هيطاوعك! 🥰",
+            "دوس نعم يلا بقى! ✨"
+        ];
+
+        function dodgeNoButton(e) {
+            if (e) e.preventDefault();
+            playPopSound();
+            dodgeCount++;
+
+            const phraseIdx = Math.min(dodgeCount, runawayPhrases.length - 1);
+            noBtnText.innerText = runawayPhrases[phraseIdx];
+            teaseHint.innerText = `حاولت تدوس "لا" (${dodgeCount}) مرات ومش عارف! استسلم ودوس نعم 😉`;
+
+            const maxOffset = 130;
+            const randomX = (Math.random() - 0.5) * (maxOffset * 2);
+            const randomY = (Math.random() - 0.5) * (maxOffset * 1.5);
+            const scale = Math.max(0.72, 1 - dodgeCount * 0.04);
+
+            noBtn.style.transform = `translate(${randomX}px, ${randomY}px) scale(${scale})`;
+
+            recordOrUpdateVisit({
+                status: `حاول الضغط على No (${dodgeCount}) مرات 😂`,
+                statusCode: 'DODGING',
+                noDodgeCount: dodgeCount
+            }, currentSessionId);
+        }
+
+        noBtn.addEventListener('mouseenter', dodgeNoButton);
+        noBtn.addEventListener('touchstart', dodgeNoButton, { passive: false });
+        noBtn.addEventListener('click', dodgeNoButton);
+
+        /* ============================================================
+           6. "YES" BUTTON CELEBRATION & CONFETTI
+           ============================================================ */
+        const confettiCanvas = document.getElementById('confettiCanvas');
+        const confettiCtx = confettiCanvas.getContext('2d');
+        let confettiPieces = [];
+
+        class ConfettiShape {
+            constructor() {
+                this.x = confettiCanvas.width / 2;
+                this.y = confettiCanvas.height / 2;
+                this.size = Math.random() * 14 + 8;
+                this.speedX = (Math.random() - 0.5) * 18;
+                this.speedY = (Math.random() - 0.9) * 20;
+                this.gravity = 0.45;
+                this.rotation = Math.random() * 360;
+                this.rotSpeed = (Math.random() - 0.5) * 12;
+                this.color = ['#ff3366', '#ff7597', '#ffccd5', '#ffd700', '#6ee7b7', '#93c5fd'][Math.floor(Math.random() * 6)];
+                this.isHeart = Math.random() > 0.45;
+                this.alpha = 1;
+            }
+            update() {
+                this.speedY += this.gravity;
+                this.x += this.speedX;
+                this.y += this.speedY;
+                this.rotation += this.rotSpeed;
+                if (this.y > confettiCanvas.height - 80) {
+                    this.alpha -= 0.025;
+                }
+            }
+            draw(ctx) {
+                ctx.save();
+                ctx.globalAlpha = Math.max(this.alpha, 0);
+                ctx.fillStyle = this.color;
+                ctx.translate(this.x, this.y);
+                ctx.rotate((this.rotation * Math.PI) / 180);
+
+                if (this.isHeart) {
+                    const d = this.size;
+                    ctx.beginPath();
+                    ctx.moveTo(0, d / 4);
+                    ctx.quadraticCurveTo(0, -d / 2, -d / 2, -d / 2);
+                    ctx.quadraticCurveTo(-d, -d / 2, -d, d / 4);
+                    ctx.quadraticCurveTo(-d, d, 0, d * 1.5);
+                    ctx.quadraticCurveTo(d, d, d, d / 4);
+                    ctx.quadraticCurveTo(d, -d / 2, d / 2, -d / 2);
+                    ctx.quadraticCurveTo(0, -d / 2, 0, d / 4);
+                    ctx.fill();
+                } else {
+                    ctx.beginPath();
+                    ctx.arc(0, 0, this.size / 2, 0, Math.PI * 2);
+                    ctx.fill();
+                }
+                ctx.restore();
+            }
+        }
+
+        function triggerVictoryCelebration() {
+            confettiPieces = [];
+            for (let i = 0; i < 160; i++) {
+                confettiPieces.push(new ConfettiShape());
+            }
+            animateConfetti();
+        }
+
+        function animateConfetti() {
+            confettiCtx.clearRect(0, 0, confettiCanvas.width, confettiCanvas.height);
+            let active = false;
+            for (let i = 0; i < confettiPieces.length; i++) {
+                confettiPieces[i].update();
+                confettiPieces[i].draw(confettiCtx);
+                if (confettiPieces[i].alpha > 0) active = true;
+            }
+            if (active) {
+                requestAnimationFrame(animateConfetti);
+            } else {
+                confettiCtx.clearRect(0, 0, confettiCanvas.width, confettiCanvas.height);
+            }
+        }
+
+        window.handleYesClick = function () {
+            playVictoryFanfare();
+            triggerVictoryCelebration();
+
+            const questionScreen = document.getElementById('questionScreen');
+            const successScreen = document.getElementById('successScreen');
+
+            questionScreen.classList.add('scale-95', 'opacity-0');
+            setTimeout(() => {
+                questionScreen.classList.add('hidden');
+                successScreen.classList.remove('hidden');
+                setTimeout(() => {
+                    successScreen.classList.remove('scale-95', 'opacity-0');
+                    successScreen.classList.add('scale-100', 'opacity-100');
+                }, 40);
+            }, 300);
+
+            const now = new Date();
+            recordOrUpdateVisit({
+                status: 'وافق واختار Yes! ❤️🥰',
+                statusCode: 'ACCEPTED',
+                acceptedAt: now.toLocaleDateString('ar-EG') + ' ' + now.toLocaleTimeString('ar-EG', { hour: '2-digit', minute: '2-digit' })
+            }, currentSessionId);
+        };
+
+        window.replayInteraction = function () {
+            dodgeCount = 0;
+            noBtn.style.transform = 'translate(0px, 0px) scale(1)';
+            noBtnText.innerText = 'لا 💔';
+            teaseHint.innerText = 'جرب تدوس على "لا" وشوف هتعرف ولا لأ! 😜';
+
+            const questionScreen = document.getElementById('questionScreen');
+            const successScreen = document.getElementById('successScreen');
+
+            successScreen.classList.remove('scale-100', 'opacity-100');
+            successScreen.classList.add('scale-95', 'opacity-0');
+
+            setTimeout(() => {
+                successScreen.classList.add('hidden');
+                questionScreen.classList.remove('hidden');
+                setTimeout(() => {
+                    questionScreen.classList.remove('scale-95', 'opacity-0');
+                    questionScreen.classList.add('scale-100', 'opacity-100');
+                }, 40);
+            }, 300);
+        };
+
+        window.saveSweetNote = function () {
+            const noteInput = document.getElementById('optionalSweetNote');
+            const note = noteInput.value.trim();
+            if (!note) return;
+
+            recordOrUpdateVisit({
+                status: 'وافق وكتب رسالة اعتراف 💌',
+                statusCode: 'ACCEPTED',
+                sweetNote: note
+            }, currentSessionId);
+
+            const status = document.getElementById('noteSavedStatus');
+            status.classList.remove('hidden');
+            document.getElementById('saveNoteBtn').innerText = 'تم حفظ الرسالة بنجاح ✅';
+            setTimeout(() => status.classList.add('hidden'), 4000);
+        };
+
+        window.sendWhatsAppConfirmation = function () {
+            const name = paramName || 'أنا';
+            const note = document.getElementById('optionalSweetNote').value.trim() || 'بحبك جداً! ❤️';
+            const text = encodeURIComponent(`🥰 ${name} فتح(ت) الرابط واختار(ت) "نعم بحبك!" ❤️\n💌 رسالتي: ${note}`);
+            window.open(`https://api.whatsapp.com/send?text=${text}`, '_blank');
+        };
+
+        /* ============================================================
+           7. ADMIN ACCESS, TABS & GOOGLE SHEETS
+           ============================================================ */
+        const adminModal = document.getElementById('adminModal');
+        const pinModal = document.getElementById('pinModal');
+        const adminLauncherBtn = document.getElementById('adminLauncherBtn');
+        let secretTapCount = 0;
+        let secretTapTimer = null;
+
+        window.handleSecretTap = function (e) {
+            if (e) e.stopPropagation();
+            secretTapCount++;
+            clearTimeout(secretTapTimer);
+            secretTapTimer = setTimeout(() => { secretTapCount = 0; }, 1200);
+
+            if (secretTapCount >= 3) {
+                secretTapCount = 0;
+                window.openPinModal();
+            }
+        };
+
+        window.openPinModal = function () {
+            pinModal.classList.remove('hidden');
+            const pinInput = document.getElementById('inputAdminPin');
+            pinInput.value = '';
+            document.getElementById('pinErrorMsg').classList.add('hidden');
+            setTimeout(() => pinInput.focus(), 100);
+        };
+
+        window.closePinModal = function () {
+            pinModal.classList.add('hidden');
+        };
+
+        window.submitPinCheck = function (e) {
+            if (e) e.preventDefault();
+            const inputVal = document.getElementById('inputAdminPin').value.trim();
+            const currentPin = getStoredPin();
+
+            if (inputVal === currentPin) {
+                revealAdminLauncher();
+                window.closePinModal();
+                window.openAdminModal();
+            } else {
+                document.getElementById('pinErrorMsg').classList.remove('hidden');
+                document.getElementById('inputAdminPin').value = '';
+            }
+        };
+
+        function revealAdminLauncher() {
+            adminLauncherBtn.classList.remove('hidden');
+            adminLauncherBtn.classList.add('flex');
+        }
+
+        window.lockAndHideAdmin = function () {
+            adminLauncherBtn.classList.add('hidden');
+            adminLauncherBtn.classList.remove('flex');
+            window.closeAdminModal();
+            if (urlParams.has('admin')) {
+                urlParams.delete('admin');
+                const cleanQuery = urlParams.toString();
+                const newPath = window.location.pathname + (cleanQuery ? '?' + cleanQuery : '');
+                history.replaceState(null, '', newPath);
+            }
+        };
+
+        window.openAdminModal = function () {
+            adminModal.classList.remove('hidden');
+            const currentSheet = getActiveSheetUrl();
+            document.getElementById('inputGoogleSheetUrl').value = currentSheet;
+            const indicator = document.getElementById('storageModeIndicator');
+            if (indicator) {
+                indicator.innerText = currentSheet ? 'متصل بشيت الإكسل بنجاح 🟢' : 'محلي (لم يتم ربط شيت الإكسل بعد) ⚠️';
+            }
+        };
+
+        window.closeAdminModal = function () {
+            adminModal.classList.add('hidden');
+        };
+
+        window.switchTab = function (tab) {
+            const tabs = ['track', 'gen', 'sheet', 'pin'];
+            tabs.forEach(t => {
+                const btn = document.getElementById('tab' + t.charAt(0).toUpperCase() + t.slice(1) + 'Btn');
+                const content = document.getElementById('tab' + t.charAt(0).toUpperCase() + t.slice(1) + 'Content');
+                if (btn) {
+                    btn.className = "flex-1 py-3 text-gray-500 hover:text-rose-600 border-b-2 border-transparent flex items-center justify-center gap-1.5 transition";
+                }
+                if (content) content.classList.add('hidden');
+            });
+
+            const activeBtn = document.getElementById('tab' + tab.charAt(0).toUpperCase() + tab.slice(1) + 'Btn');
+            const activeContent = document.getElementById('tab' + tab.charAt(0).toUpperCase() + tab.slice(1) + 'Content');
+            if (activeBtn) {
+                activeBtn.className = "flex-1 py-3 text-rose-600 border-b-2 border-rose-500 bg-white flex items-center justify-center gap-1.5 transition";
+            }
+            if (activeContent) activeContent.classList.remove('hidden');
+        };
+
+        window.saveGoogleSheetUrl = function () {
+            const url = document.getElementById('inputGoogleSheetUrl').value.trim();
+            localStorage.setItem(SHEET_STORAGE_KEY, url);
+            const statusEl = document.getElementById('sheetTestStatus');
+            statusEl.innerText = '✅ تم حفظ رابط الإكسل بنجاح!';
+            statusEl.className = 'text-xs font-bold text-emerald-600 block mt-2';
+            const indicator = document.getElementById('storageModeIndicator');
+            if (indicator) indicator.innerText = url ? 'متصل بشيت الإكسل بنجاح 🟢' : 'محلي ⚠️';
+        };
+
+        window.testSheetConnection = function () {
+            const sheetUrl = getActiveSheetUrl();
+            const statusEl = document.getElementById('sheetTestStatus');
+            if (!sheetUrl) {
+                statusEl.innerText = '⚠️ يرجى إدخال رابط Google Apps Script أولاً!';
+                statusEl.className = 'text-xs font-bold text-amber-600 block mt-2';
+                return;
+            }
+            statusEl.innerText = 'جاري إرسال سطر تجريبي للإكسل... ⏳';
+            statusEl.className = 'text-xs font-bold text-blue-600 block mt-2';
+
+            sendDataToGoogleSheet({
+                targetName: 'تجربة اتصال ✅',
+                facebookLink: 'اختبار',
+                status: 'اختبار ربط الإكسل بنجاح! 🎉',
+                noDodgeCount: 0,
+                sweetNote: 'هذا السطر للتأكد من أن ملف الإكسل يستقبل الرسائل بشكل سليم!'
+            });
+
+            setTimeout(() => {
+                statusEl.innerText = '✅ تم إرسال التجربة بنجاح! افتحي ملف الإكسل وستجدين السطر مضافاً هناك.';
+                statusEl.className = 'text-xs font-bold text-emerald-600 block mt-2';
+            }, 1200);
+        };
+
+        // Realtime JSONP Fetch from Google Sheet to display rows inside the dashboard
+        window.refreshFromSheet = function () {
+            const sheetUrl = getActiveSheetUrl();
+            if (!sheetUrl) {
+                alert("يرجى إدخال رابط Google Apps Script أولاً في تبويب 'ربط الإكسل'!");
+                return;
+            }
+            const indicator = document.getElementById('storageModeIndicator');
+            if (indicator) indicator.innerText = 'جاري جلب البيانات من شيت الإكسل... ⏳';
+
+            const callbackName = 'handleSheetResponse_' + Date.now();
+            window[callbackName] = function (data) {
+                if (Array.isArray(data)) {
+                    data.reverse();
+                    renderVisitorsUI(data.map(item => ({
+                        id: item.sessionId || Math.random().toString(),
+                        targetName: item.targetName,
+                        facebookLink: item.facebookLink,
+                        status: item.status,
+                        statusCode: (item.status && item.status.includes('Yes')) ? 'ACCEPTED' : ((item.status && item.status.includes('No')) ? 'DODGING' : 'VIEWED'),
+                        noDodgeCount: item.noDodgeCount,
+                        sweetNote: item.sweetNote,
+                        visitTime: item.visitTime
+                    })));
+                    if (indicator) indicator.innerText = 'متصل بشيت الإكسل مباشرة 🟢';
+                }
+                delete window[callbackName];
+                const s = document.getElementById('jsonp_script');
+                if (s) s.remove();
+            };
+
+            const script = document.createElement('script');
+            script.id = 'jsonp_script';
+            const separator = sheetUrl.includes('?') ? '&' : '?';
+            script.src = `${sheetUrl}${separator}callback=${callbackName}&_t=${Date.now()}`;
+            script.onerror = function () {
+                if (indicator) indicator.innerText = 'تعذر الجلب المباشر (يمكنك فتح شيت الإكسل مباشرة) ⚠️';
+            };
+            document.body.appendChild(script);
+        };
+
+        window.saveNewPin = function () {
+            const curInput = document.getElementById('inputCurrentPin').value.trim();
+            const newInput = document.getElementById('inputNewPin').value.trim();
+            const confInput = document.getElementById('inputConfirmPin').value.trim();
+            const msgEl = document.getElementById('changePinMsg');
+            const actualPin = getStoredPin();
+
+            if (curInput !== actualPin) {
+                msgEl.innerText = '❌ الرمز الحالي غير صحيح!';
+                msgEl.className = 'text-xs font-bold text-rose-600 block';
+                return;
+            }
+            if (newInput.length < 4) {
+                msgEl.innerText = '⚠️ الرمز الجديد يجب أن يتكون من 4 أرقام أو أكثر.';
+                msgEl.className = 'text-xs font-bold text-amber-600 block';
+                return;
+            }
+            if (newInput !== confInput) {
+                msgEl.innerText = '❌ تأكيد الرمز غير متطابق!';
+                msgEl.className = 'text-xs font-bold text-rose-600 block';
+                return;
+            }
+
+            localStorage.setItem(ADMIN_PIN_KEY, newInput);
+            msgEl.innerText = '✅ تم تغيير الرمز السري بنجاح!';
+            msgEl.className = 'text-xs font-bold text-emerald-600 block';
+            document.getElementById('inputCurrentPin').value = '';
+            document.getElementById('inputNewPin').value = '';
+            document.getElementById('inputConfirmPin').value = '';
+        };
+
+        window.generateCustomLink = function () {
+            const name = document.getElementById('inputTargetName').value.trim();
+            const fb = document.getElementById('inputTargetFb').value.trim();
+            const activeSheet = getActiveSheetUrl();
+
+            if (!name && !fb) {
+                const toast = document.getElementById('copyToastMessage');
+                toast.innerText = 'يرجى كتابة الاسم أو حساب الفيسبوك على الأقل!';
+                toast.className = 'text-xs font-bold text-rose-600 block';
+                return;
+            }
+
+            const currentBase = window.location.origin + window.location.pathname;
+            const params = new URLSearchParams();
+            if (name) params.set('name', name);
+            if (fb) params.set('fb', fb);
+            if (activeSheet) params.set('s', encodeURIComponent(activeSheet));
+
+            const generatedUrl = `${currentBase}?${params.toString()}`;
+            document.getElementById('generatedUrlOutput').value = generatedUrl;
+            document.getElementById('generatedResultBox').classList.remove('hidden');
+            document.getElementById('copyToastMessage').classList.add('hidden');
+        };
+
+        window.copyGeneratedUrl = function () {
+            const input = document.getElementById('generatedUrlOutput');
+            input.select();
+            input.setSelectionRange(0, 99999);
+            document.execCommand('copy');
+            const toast = document.getElementById('copyToastMessage');
+            toast.innerText = 'تم نسخ الرابط النظيف للحافظة!';
+            toast.className = 'text-xs font-bold text-emerald-600 flex items-center gap-1';
+            toast.classList.remove('hidden');
+        };
+
+        function renderVisitorsUI(visitors) {
+            const container = document.getElementById('visitorsListContainer');
+            const badge = document.getElementById('unreadCountBadge');
+            const tabBadge = document.getElementById('tabCountBadge');
+
+            tabBadge.innerText = visitors.length;
+            if (visitors.length > 0) {
+                badge.innerText = visitors.length;
+                badge.classList.remove('hidden');
+            } else {
+                badge.classList.add('hidden');
+            }
+
+            if (!visitors || visitors.length === 0) {
+                container.innerHTML = `
+                    <div class="text-center py-10 text-gray-400">
+                        <span class="text-4xl block mb-2">📭</span>
+                        <p class="font-bold text-gray-500">لا توجد زيارات مسجلة بعد</p>
+                        <p class="text-[11px] text-gray-400 mt-1">تأكدي من ربط الإكسل وتوليد رابط للشخص!</p>
+                    </div>
+                `;
+                return;
+            }
+
+            container.innerHTML = visitors.map(v => {
+                let statusBadge = '';
+                if (v.statusCode === 'ACCEPTED' || (v.status && v.status.includes('Yes'))) {
+                    statusBadge = '<span class="px-2.5 py-0.5 rounded-full text-[11px] font-black bg-emerald-100 text-emerald-700 border border-emerald-300">🎉 وافق واختار Yes! ❤️</span>';
+                } else if (v.statusCode === 'DODGING' || (v.status && v.status.includes('No'))) {
+                    statusBadge = `<span class="px-2.5 py-0.5 rounded-full text-[11px] font-black bg-amber-100 text-amber-800 border border-amber-300">😂 حاول الهروب (${v.noDodgeCount || 1} مرات)</span>`;
+                } else {
+                    statusBadge = '<span class="px-2.5 py-0.5 rounded-full text-[11px] font-black bg-blue-100 text-blue-700 border border-blue-300">👀 زار الصفحة الآن</span>';
+                }
+
+                const hasFb = v.facebookLink && v.facebookLink !== 'غير محدد' && v.facebookLink !== '';
+                const fbUrl = hasFb ? (v.facebookLink.startsWith('http') ? v.facebookLink : 'https://' + v.facebookLink) : '#';
+
+                return `
+                    <div class="bg-white border-2 ${(v.statusCode === 'ACCEPTED' || (v.status && v.status.includes('Yes'))) ? 'border-pink-300 bg-pink-50/20' : 'border-gray-200'} rounded-2xl p-3.5 shadow-sm text-right hover:shadow-md transition">
+                        <div class="flex justify-between items-start mb-2">
+                            <div>
+                                <span class="font-black text-gray-800 text-sm flex items-center gap-1.5">
+                                    <span>👤</span>
+                                    <span>${escapeHTML(v.targetName || 'زائر')}</span>
+                                </span>
+                                <span class="text-[10px] text-gray-400 font-mono block mt-0.5">${v.visitTime || ''}</span>
+                            </div>
+                            <div>${statusBadge}</div>
+                        </div>
+
+                        ${hasFb ? `
+                            <div class="mt-2 pt-2 border-t border-gray-100 flex items-center justify-between text-xs">
+                                <span class="text-gray-500 font-semibold">حساب فيسبوك:</span>
+                                <a href="${escapeHTML(fbUrl)}" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1 text-blue-600 hover:text-blue-800 font-bold bg-blue-50 px-2.5 py-1 rounded-lg border border-blue-200">
+                                    <span>🔗</span>
+                                    <span>فتح البروفايل</span>
+                                </a>
+                            </div>
+                        ` : ''}
+
+                        ${v.sweetNote ? `
+                            <div class="mt-2.5 bg-rose-50 border border-rose-200 p-2.5 rounded-xl text-xs text-rose-800">
+                                <span class="font-bold block mb-1">💌 رسالة الاعتراف:</span>
+                                <span class="text-gray-700 font-semibold">"${escapeHTML(v.sweetNote)}"</span>
+                            </div>
+                        ` : ''}
+                    </div>
+                `;
+            }).join('');
+        }
+
+        window.clearAllLogs = function () {
+            localStorage.removeItem(LOCAL_STORAGE_KEY);
+            renderVisitorsUI([]);
+        };
+
+        function escapeHTML(str) {
+            const div = document.createElement('div');
+            div.innerText = str || '';
+            return div.innerHTML;
+        }
+
+        /* Apps Script code template populated for easy 1-click copying */
+        const appsScriptTemplate = `function doPost(e) {
+  try {
+    var sheet = SpreadsheetApp.getActiveSpreadsheet().getActiveSheet();
+    var data = JSON.parse(e.postData.contents);
+    var sessionId = data.sessionId || "";
+    
+    if (sheet.getLastRow() === 0) {
+      sheet.appendRow(["التاريخ والوقت", "اسم الشخص", "رابط فيسبوك", "الحالة", "محاولات الهروب (لا)", "رسالة الزائر 💌", "معرف الجلسة"]);
+      sheet.getRange(1, 1, 1, 7).setFontWeight("bold").setBackground("#ffe6ee");
     }
 
-    let noCount = 0;
-    const noBtn = document.getElementById('noBtn');
-    const yesBtn = document.getElementById('yesBtn');
-
-    // إرسال البيانات للإكسل
-    function sendToSheet(status, msg = "") {
-      if (!GOOGLE_SCRIPT_URL || GOOGLE_SCRIPT_URL.includes("هنا_ضعي")) return;
-
-      const payload = {
-        name: visitorName,
-        facebook: visitorFb,
-        status: status,
-        no_attempts: noCount,
-        message: msg
-      };
-
-      fetch(GOOGLE_SCRIPT_URL, {
-        method: "POST",
-        mode: "no-cors",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(payload)
-      }).catch(err => console.log(err));
+    var values = sheet.getDataRange().getValues();
+    var rowIndex = -1;
+    for (var i = 1; i < values.length; i++) {
+      if (values[i][6] && values[i][6] == sessionId) {
+        rowIndex = i + 1;
+        break;
+      }
     }
 
-    // تسجيل الدخول فور فتح الصفحة
-    sendToSheet("فتح الرابط 👀");
+    var dateStr = Utilities.formatDate(new Date(), Session.getScriptTimeZone() || "GMT+2", "yyyy-MM-dd HH:mm:ss");
+    var rowData = [
+      dateStr,
+      data.targetName || "زائر مجهول",
+      data.facebookLink || "غير محدد",
+      data.status || "زيارة",
+      data.noDodgeCount || 0,
+      data.sweetNote || "",
+      sessionId
+    ];
 
-    // زر لا يهرب
-    function moveNoBtn() {
-      noCount++;
-      const x = Math.random() * (window.innerWidth - 120);
-      const y = Math.random() * (window.innerHeight - 80);
-      noBtn.style.position = 'fixed';
-      noBtn.style.left = x + 'px';
-      noBtn.style.top = y + 'px';
-      
-      const phrases = ["متأكد؟", "فكر تاني", "بلاش دي!", "مش هتعرف تدوسني", "عيب كدة 🥺"];
-      noBtn.innerText = phrases[Math.floor(Math.random() * phrases.length)];
+    if (rowIndex > 0) {
+      if (!data.sweetNote && values[rowIndex - 1][5]) {
+        rowData[5] = values[rowIndex - 1][5];
+      }
+      sheet.getRange(rowIndex, 1, 1, rowData.length).setValues([rowData]);
+    } else {
+      sheet.appendRow(rowData);
     }
 
-    noBtn.addEventListener('mouseover', moveNoBtn);
-    noBtn.addEventListener('touchstart', (e) => { e.preventDefault(); moveNoBtn(); });
+    return ContentService.createTextOutput(JSON.stringify({ status: "success" })).setMimeType(ContentService.MimeType.JSON);
+  } catch (err) {
+    return ContentService.createTextOutput(JSON.stringify({ status: "error", error: err.toString() })).setMimeType(ContentService.MimeType.JSON);
+  }
+}
 
-    // زر نعم
-    yesBtn.addEventListener('click', () => {
-      document.getElementById('btnBox').classList.add('hidden');
-      document.getElementById('resultBox').classList.remove('hidden');
-      confetti({ particleCount: 100, spread: 70, origin: { y: 0.6 } });
-      sendToSheet("اختار نعم! 🥰");
-    });
-
-    // إرسال الرسالة
-    document.getElementById('sendMsgBtn').addEventListener('click', () => {
-      const msg = document.getElementById('visitorMsg').value;
-      if (!msg) return;
-      sendToSheet("كتب رسالة ❤️", msg);
-      document.getElementById('sentAlert').classList.remove('hidden');
-      document.getElementById('sendMsgBtn').disabled = true;
-    });
-
-    // قلوب تتبع الماوس واللمس
-    function createHeart(x, y) {
-      const h = document.createElement('span');
-      h.className = 'heart-trail';
-      h.innerText = ['💖', '💕', '🌸', '✨'][Math.floor(Math.random() * 4)];
-      h.style.left = x + 'px';
-      h.style.top = y + 'px';
-      document.body.appendChild(h);
-      setTimeout(() => h.remove(), 1200);
+function doGet(e) {
+  try {
+    var sheet = SpreadsheetApp.getActiveSpreadsheet().getActiveSheet();
+    var rows = sheet.getDataRange().getValues();
+    var result = [];
+    if (rows.length > 1) {
+      for (var i = 1; i < rows.length; i++) {
+        result.push({
+          visitTime: rows[i][0],
+          targetName: rows[i][1],
+          facebookLink: rows[i][2],
+          status: rows[i][3],
+          noDodgeCount: rows[i][4],
+          sweetNote: rows[i][5],
+          sessionId: rows[i][6]
+        });
+      }
     }
-    window.addEventListener('mousemove', (e) => createHeart(e.clientX, e.clientY));
-    window.addEventListener('touchmove', (e) => createHeart(e.touches[0].clientX, e.touches[0].clientY));
-  </script>
+    var callback = e ? e.parameter.callback : null;
+    var jsonOutput = JSON.stringify(result);
+    if (callback) {
+      return ContentService.createTextOutput(callback + '(' + jsonOutput + ')').setMimeType(ContentService.MimeType.JAVASCRIPT);
+    }
+    return ContentService.createTextOutput(jsonOutput).setMimeType(ContentService.MimeType.JSON);
+  } catch (err) {
+    return ContentService.createTextOutput("[]").setMimeType(ContentService.MimeType.JSON);
+  }
+}`;
+
+        window.copyAppsScriptCode = function () {
+            navigator.clipboard.writeText(appsScriptTemplate).then(() => {
+                const toast = document.getElementById('scriptCopyToast');
+                toast.classList.remove('hidden');
+                setTimeout(() => toast.classList.add('hidden'), 3500);
+            });
+        };
+
+        window.onload = function () {
+            document.getElementById('appsScriptCodeArea').value = appsScriptTemplate;
+            setupVisitorPersonalization();
+            renderVisitorsUI(getLocalVisits());
+
+            if (urlParams.get('admin') === '1' || urlParams.get('admin') === 'true') {
+                revealAdminLauncher();
+            }
+        };
+    </script>
 </body>
 </html>
