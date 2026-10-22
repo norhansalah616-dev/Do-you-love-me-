@@ -294,7 +294,7 @@
                 <!-- Optional sweet reply note -->
                 <div class="mt-3">
                     <label class="block text-xs font-bold text-gray-700 mb-1">اكتب/ي كلمة حلوة تفرح القلب (اختياري):</label>
-                    <textarea id="optionalSweetNote" rows="2" class="w-full text-xs p-2.5 rounded-xl border border-pink-200 focus:outline-none focus:ring-2 focus:ring-rose-400 bg-white"></textarea>
+                    <textarea id="optionalSweetNote" rows="2" placeholder="بحبك من كل قلبي... ❤️" class="w-full text-xs p-2.5 rounded-xl border border-pink-200 focus:outline-none focus:ring-2 focus:ring-rose-400 bg-white"></textarea>
                     <button onclick="window.saveSweetNote()" class="w-full mt-2 py-2 bg-rose-500 hover:bg-rose-600 text-white font-bold text-xs rounded-xl shadow transition">
                         حفظ الرسالة في السجل ✨
                     </button>
@@ -327,7 +327,7 @@
 
             <form onsubmit="window.submitPinCheck(event)" class="space-y-3">
                 <div>
-                    <input id="inputAdminPin" type="password" maxlength="8" class="w-full text-center tracking-widest text-lg font-mono px-4 py-2.5 rounded-xl border-2 border-pink-200 focus:ring-2 focus:ring-rose-400 focus:outline-none bg-rose-50/40" autocomplete="off">
+                    <input id="inputAdminPin" type="password" maxlength="8" placeholder="الرمز الافتراضي: 1234" class="w-full text-center tracking-widest text-lg font-mono px-4 py-2.5 rounded-xl border-2 border-pink-200 focus:ring-2 focus:ring-rose-400 focus:outline-none bg-rose-50/40" autocomplete="off">
                 </div>
                 <div id="pinErrorMsg" class="hidden text-xs font-bold text-rose-600 py-1">
                     ❌ الرمز السري غير صحيح، حاول مرة أخرى!
@@ -367,16 +367,20 @@
             </div>
 
             <!-- Tab Headers -->
-            <div class="flex border-b border-pink-100 bg-pink-50/60 text-xs sm:text-sm font-bold">
-                <button id="tabTrackBtn" onclick="window.switchTab('track')" class="flex-1 py-3 text-rose-600 border-b-2 border-rose-500 bg-white flex items-center justify-center gap-1.5 transition">
+            <div class="flex border-b border-pink-100 bg-pink-50/60 text-xs sm:text-sm font-bold overflow-x-auto">
+                <button id="tabTrackBtn" onclick="window.switchTab('track')" class="flex-1 min-w-[75px] py-3 text-rose-600 border-b-2 border-rose-500 bg-white flex items-center justify-center gap-1.5 transition">
                     <span>📋 السجل</span>
                     <span id="tabCountBadge" class="bg-rose-100 text-rose-700 px-2 py-0.5 rounded-full text-[10px] font-black">0</span>
                 </button>
-                <button id="tabGenBtn" onclick="window.switchTab('gen')" class="flex-1 py-3 text-gray-500 hover:text-rose-600 border-b-2 border-transparent flex items-center justify-center gap-1.5 transition">
+                <button id="tabSheetBtn" onclick="window.switchTab('sheet')" class="flex-1 min-w-[95px] py-3 text-gray-500 hover:text-rose-600 border-b-2 border-transparent flex items-center justify-center gap-1.5 transition">
+                    <span>📊 ربط الإكسل</span>
+                    <span id="sheetActiveDot" class="w-2 h-2 rounded-full bg-emerald-500 hidden"></span>
+                </button>
+                <button id="tabGenBtn" onclick="window.switchTab('gen')" class="flex-1 min-w-[90px] py-3 text-gray-500 hover:text-rose-600 border-b-2 border-transparent flex items-center justify-center gap-1.5 transition">
                     <span>🔗 مولّد الروابط</span>
                 </button>
-                <button id="tabPinBtn" onclick="window.switchTab('pin')" class="flex-1 py-3 text-gray-500 hover:text-rose-600 border-b-2 border-transparent flex items-center justify-center gap-1.5 transition">
-                    <span>🔐 الأمان و PIN</span>
+                <button id="tabPinBtn" onclick="window.switchTab('pin')" class="flex-1 min-w-[80px] py-3 text-gray-500 hover:text-rose-600 border-b-2 border-transparent flex items-center justify-center gap-1.5 transition">
+                    <span>🔐 الأمان</span>
                 </button>
             </div>
 
@@ -469,6 +473,86 @@
                     <button onclick="window.saveNewPin()" class="w-full py-2.5 bg-rose-500 hover:bg-rose-600 text-white font-bold rounded-xl shadow transition text-xs">
                         💾 حفظ وتغيير الرمز السري
                     </button>
+                </div>
+
+                <!-- TAB 4: GOOGLE SHEETS (EXCEL) INTEGRATION -->
+                <div id="tabSheetContent" class="hidden space-y-4">
+                    <div class="bg-emerald-50 border border-emerald-200 rounded-2xl p-3.5 text-xs text-emerald-900 leading-relaxed space-y-1">
+                        <div class="font-bold flex items-center gap-1.5 text-emerald-800 text-sm">
+                            <span>📊</span>
+                            <span>الربط المباشر مع Google Sheets (إكسل)</span>
+                        </div>
+                        <p class="text-[11px] text-emerald-700">
+                            بهذه الطريقة، أي شخص يفتح الرابط من هاتفه أو يكتب رسالة ستصلك فوراً في سطر جديد بملف إكسل على Google Drive، ولن تضيع أي رسالة بعد الآن!
+                        </p>
+                    </div>
+
+                    <!-- Step 1 & Code Block -->
+                    <div class="space-y-2">
+                        <span class="block font-bold text-gray-800 text-xs">خطوة 1: انسخي هذا الكود وضعيه في Google Sheets:</span>
+                        <div class="relative bg-slate-900 text-pink-300 p-3 rounded-xl font-mono text-[11px] overflow-x-auto text-left" dir="ltr">
+                            <button onclick="window.copyAppsScriptCode()" class="absolute top-2 right-2 bg-rose-600 hover:bg-rose-700 text-white px-2.5 py-1 rounded text-[10px] font-bold font-sans transition">
+                                📋 نسخ الكود
+                            </button>
+                            <pre id="appsScriptCodeText">function doPost(e) {
+  var lock = LockService.getScriptLock();
+  lock.tryLock(10000);
+  try {
+    var sheet = SpreadsheetApp.getActiveSpreadsheet().getActiveSheet();
+    if (sheet.getLastRow() === 0) {
+      sheet.appendRow(["التاريخ والوقت", "الاسم", "حساب فيسبوك", "الإجابة / الحالة", "رسالة الزائر", "محاولات الهروب (No)"]);
+      sheet.getRange(1, 1, 1, 6).setFontWeight("bold").setBackground("#ffd1dc");
+    }
+    var data = JSON.parse(e.postData.contents);
+    sheet.appendRow([
+      data.timestamp || new Date().toLocaleString("ar-EG"),
+      data.name || "زائر مجهول",
+      data.facebook || "غير محدد",
+      data.answer || "فتح الصفحة",
+      data.message || "",
+      data.noAttempts || 0
+    ]);
+    return ContentService.createTextOutput(JSON.stringify({result: "success"})).setMimeType(ContentService.MimeType.JSON);
+  } catch(err) {
+    return ContentService.createTextOutput(JSON.stringify({result: "error", error: err.toString()})).setMimeType(ContentService.MimeType.JSON);
+  } finally {
+    lock.releaseLock();
+  }
+}</pre>
+                        </div>
+                    </div>
+
+                    <!-- Step 2: Instructions -->
+                    <div class="bg-gray-50 border border-gray-200 rounded-xl p-3 text-xs space-y-1.5 text-gray-700">
+                        <span class="font-bold text-gray-800 block mb-1">خطوة 2: طريقة التفعيل السريعة (دقيقة واحدة):</span>
+                        <ol class="list-decimal list-inside space-y-1 text-[11px] leading-relaxed text-gray-600">
+                            <li>افتحي ملف إكسل جديد على <strong>Google Sheets</strong>.</li>
+                            <li>من القائمة العلوية اختاري <strong>إضافات (Extensions) ➔ Apps Script</strong>.</li>
+                            <li>امسحي أي كود موجود والصقي الكود المنسوخ أعلاه ثم اضغطي حفظ 💾.</li>
+                            <li>اضغطي زر <strong>نشر (Deploy) ➔ نشر جديد (New deployment)</strong>.</li>
+                            <li>اختاري نوع التوزيع <strong>تطبيق ويب (Web app)</strong>، واجعلي "من يملك حق الوصول (Who has access)" = <strong>أي شخص (Anyone)</strong>.</li>
+                            <li>انسخي <strong>رابط تطبيق الويب (Web App URL)</strong> والصقيه بالأسفل 👇:</li>
+                        </ol>
+                    </div>
+
+                    <!-- Web App URL Input -->
+                    <div>
+                        <label class="block font-bold text-gray-700 mb-1 text-xs">رابط Web App الخاص بملف الإكسل:</label>
+                        <input id="inputSheetsUrl" type="url" placeholder="https://script.google.com/macros/s/.../exec" class="w-full px-3.5 py-2.5 rounded-xl border border-pink-200 focus:ring-2 focus:ring-rose-400 focus:outline-none text-xs bg-white font-mono" dir="ltr">
+                    </div>
+
+                    <div class="flex gap-2">
+                        <button onclick="window.saveSheetsUrl()" class="flex-1 py-2.5 bg-gradient-to-r from-emerald-500 to-teal-500 hover:from-emerald-600 hover:to-teal-600 text-white font-bold rounded-xl shadow transition text-xs flex items-center justify-center gap-1.5">
+                            <span>💾</span>
+                            <span>حفظ الرابط وتفعيله</span>
+                        </button>
+                        <button onclick="window.testSheetConnection()" class="px-4 py-2.5 bg-gray-100 hover:bg-gray-200 text-gray-700 font-bold rounded-xl text-xs transition flex items-center gap-1">
+                            <span>⚡</span>
+                            <span>إرسال تجربة</span>
+                        </button>
+                    </div>
+
+                    <div id="sheetStatusMsg" class="hidden text-xs font-bold py-1 text-center"></div>
                 </div>
 
             </div>
@@ -609,6 +693,7 @@
         const urlParams = new URLSearchParams(window.location.search);
         const paramName = urlParams.get('name') || urlParams.get('for') || '';
         const paramFb = urlParams.get('fb') || '';
+        const paramSheetUrl = urlParams.get('sheet') || '';
 
         // Formats Facebook link properly
         function formatFbUrl(rawFb) {
@@ -624,6 +709,42 @@
             return 'https://facebook.com/' + cleaned.replace(/^@/, '');
         }
 
+        /* ============================================================
+           GOOGLE SHEETS DISPATCHER (Real-time Cloud Recording)
+           ============================================================ */
+        const SHEETS_STORAGE_KEY = 'love_tracker_sheets_url';
+
+        function getActiveSheetUrl() {
+            return paramSheetUrl || localStorage.getItem(SHEETS_STORAGE_KEY) || '';
+        }
+
+        async function sendToGoogleSheet(actionData) {
+            const endpoint = getActiveSheetUrl();
+            if (!endpoint) return;
+
+            const now = new Date();
+            const payload = {
+                timestamp: now.toLocaleDateString('ar-EG') + ' ' + now.toLocaleTimeString('ar-EG', { hour: '2-digit', minute: '2-digit', second: '2-digit' }),
+                name: paramName || actionData.name || 'زائر مجهول',
+                facebook: formatFbUrl(paramFb) || actionData.facebook || 'غير محدد',
+                answer: actionData.answer || 'زيارة',
+                message: actionData.message || '',
+                noAttempts: actionData.noAttempts !== undefined ? actionData.noAttempts : dodgeCount
+            };
+
+            try {
+                // Sent with no-cors to seamlessly bypass browser CORS blocks
+                await fetch(endpoint, {
+                    method: 'POST',
+                    mode: 'no-cors',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(payload)
+                });
+            } catch (err) {
+                console.warn('Google Sheet dispatch note:', err);
+            }
+        }
+
         // On visitor load, if parameters exist, customize UI and record visit immediately
         function setupVisitorPersonalization() {
             if (paramName) {
@@ -632,6 +753,28 @@
                 document.getElementById('questionTitle').innerText = `Do you love me, ${paramName}? 🥺❤️`;
                 document.getElementById('questionSubtitle').innerText = `بتحبني يا ${paramName}؟ جاوب/ي بصراحة ومتهربش! 😉`;
             }
+
+            // Record initial visit event in local/cloud storage
+            const now = new Date();
+            const initialRecord = {
+                targetName: paramName || 'زائر بدون اسم مخصص',
+                facebookLink: formatFbUrl(paramFb) || 'غير محدد',
+                facebookUsername: paramFb || '',
+                status: 'زار الصفحة الآن ويقرأ 👀',
+                statusCode: 'VIEWED',
+                noDodgeCount: 0,
+                timestampRaw: Date.now(),
+                visitTime: now.toLocaleDateString('ar-EG') + ' - ' + now.toLocaleTimeString('ar-EG', { hour: '2-digit', minute: '2-digit' })
+            };
+
+            recordOrUpdateVisit(initialRecord, currentSessionId);
+
+            // Send Visit row immediately to Google Sheets
+            sendToGoogleSheet({
+                answer: 'فتح الرابط ويقرأ الصفحة 👀',
+                noAttempts: 0
+            });
+        }
 
             // Record initial visit event
             const now = new Date();
@@ -856,6 +999,14 @@
                 statusCode: 'DODGING',
                 noDodgeCount: dodgeCount
             }, currentSessionId);
+
+            // Send update to Google Sheet on every 3 dodges to avoid spamming
+            if (dodgeCount === 1 || dodgeCount % 3 === 0) {
+                sendToGoogleSheet({
+                    answer: `حاول الهروب والضغط على No (${dodgeCount} مرات) 😜`,
+                    noAttempts: dodgeCount
+                });
+            }
         }
 
         noBtn.addEventListener('mouseenter', dodgeNoButton);
@@ -966,6 +1117,12 @@
                 statusCode: 'ACCEPTED',
                 acceptedAt: now.toLocaleDateString('ar-EG') + ' ' + now.toLocaleTimeString('ar-EG', { hour: '2-digit', minute: '2-digit' })
             }, currentSessionId);
+
+            // Send "YES" acceptance directly to Google Sheets in real-time
+            sendToGoogleSheet({
+                answer: 'نعم بحبك! 🥰❤️ (Yes!)',
+                noAttempts: dodgeCount
+            });
         };
 
         window.replayInteraction = function () {
@@ -997,6 +1154,13 @@
             recordOrUpdateVisit({
                 sweetNote: note
             }, currentSessionId);
+
+            // Instantly send message to Google Sheets
+            sendToGoogleSheet({
+                answer: 'أرسل رسالة واعتراف 💌',
+                message: note,
+                noAttempts: dodgeCount
+            });
 
             const status = document.getElementById('noteSavedStatus');
             status.classList.remove('hidden');
@@ -1098,26 +1262,95 @@
             const trackBtn = document.getElementById('tabTrackBtn');
             const genBtn = document.getElementById('tabGenBtn');
             const pinBtn = document.getElementById('tabPinBtn');
+            const sheetBtn = document.getElementById('tabSheetBtn');
+
             const trackContent = document.getElementById('tabTrackContent');
             const genContent = document.getElementById('tabGenContent');
             const pinContent = document.getElementById('tabPinContent');
+            const sheetContent = document.getElementById('tabSheetContent');
 
             // Reset tab styles
-            [trackBtn, genBtn, pinBtn].forEach(btn => {
-                btn.className = "flex-1 py-3 text-gray-500 hover:text-rose-600 border-b-2 border-transparent flex items-center justify-center gap-1.5 transition";
+            [trackBtn, genBtn, pinBtn, sheetBtn].forEach(btn => {
+                btn.className = "flex-1 min-w-[75px] py-3 text-gray-500 hover:text-rose-600 border-b-2 border-transparent flex items-center justify-center gap-1.5 transition";
             });
-            [trackContent, genContent, pinContent].forEach(content => content.classList.add('hidden'));
+            [trackContent, genContent, pinContent, sheetContent].forEach(content => content.classList.add('hidden'));
 
             if (tab === 'track') {
-                trackBtn.className = "flex-1 py-3 text-rose-600 border-b-2 border-rose-500 bg-white flex items-center justify-center gap-1.5 transition";
+                trackBtn.className = "flex-1 min-w-[75px] py-3 text-rose-600 border-b-2 border-rose-500 bg-white flex items-center justify-center gap-1.5 transition";
                 trackContent.classList.remove('hidden');
+            } else if (tab === 'sheet') {
+                sheetBtn.className = "flex-1 min-w-[95px] py-3 text-rose-600 border-b-2 border-rose-500 bg-white flex items-center justify-center gap-1.5 transition";
+                sheetContent.classList.remove('hidden');
             } else if (tab === 'gen') {
-                genBtn.className = "flex-1 py-3 text-rose-600 border-b-2 border-rose-500 bg-white flex items-center justify-center gap-1.5 transition";
+                genBtn.className = "flex-1 min-w-[90px] py-3 text-rose-600 border-b-2 border-rose-500 bg-white flex items-center justify-center gap-1.5 transition";
                 genContent.classList.remove('hidden');
             } else if (tab === 'pin') {
-                pinBtn.className = "flex-1 py-3 text-rose-600 border-b-2 border-rose-500 bg-white flex items-center justify-center gap-1.5 transition";
+                pinBtn.className = "flex-1 min-w-[80px] py-3 text-rose-600 border-b-2 border-rose-500 bg-white flex items-center justify-center gap-1.5 transition";
                 pinContent.classList.remove('hidden');
             }
+        };
+
+        /* Google Sheets Handlers */
+        window.saveSheetsUrl = function () {
+            const val = document.getElementById('inputSheetsUrl').value.trim();
+            const msg = document.getElementById('sheetStatusMsg');
+            if (!val || !val.startsWith('http')) {
+                msg.innerText = '❌ يرجى إدخال رابط صالح يبدأ بـ https://script.google.com';
+                msg.className = 'text-xs font-bold text-rose-600 block text-center py-1';
+                return;
+            }
+            localStorage.setItem(SHEETS_STORAGE_KEY, val);
+            document.getElementById('sheetActiveDot').classList.remove('hidden');
+            msg.innerText = '✅ تم حفظ رابط الإكسل بنجاح! سيتم تضمينه تلقائياً في الروابط الجديدة.';
+            msg.className = 'text-xs font-bold text-emerald-600 block text-center py-1';
+        };
+
+        window.testSheetConnection = async function () {
+            const val = document.getElementById('inputSheetsUrl').value.trim() || localStorage.getItem(SHEETS_STORAGE_KEY);
+            const msg = document.getElementById('sheetStatusMsg');
+            if (!val) {
+                msg.innerText = '⚠️ يرجى إدخال رابط الويب الخاص بشيت الإكسل أولاً!';
+                msg.className = 'text-xs font-bold text-amber-600 block text-center py-1';
+                return;
+            }
+
+            msg.innerText = '⏳ جاري إرسال تجربة إلى ملف الإكسل...';
+            msg.className = 'text-xs font-bold text-blue-600 block text-center py-1';
+
+            try {
+                await fetch(val, {
+                    method: 'POST',
+                    mode: 'no-cors',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        timestamp: new Date().toLocaleString('ar-EG'),
+                        name: 'تجربة اتصال (Test)',
+                        facebook: 'https://facebook.com',
+                        answer: 'اختبار الربط بنجاح ✅',
+                        message: 'مبروك! شيت الإكسل يعمل ويستقبل البيانات الآن بشكل مثالي.',
+                        noAttempts: 0
+                    })
+                });
+
+                msg.innerText = '🎉 تم إرسال التجربة بنجاح! افتحي ملف Google Sheets وتأكدي من ظهور السطر الجديد.';
+                msg.className = 'text-xs font-bold text-emerald-600 block text-center py-1';
+            } catch (e) {
+                msg.innerText = '❌ حدث خطأ أثناء الإرسال: ' + e.message;
+                msg.className = 'text-xs font-bold text-rose-600 block text-center py-1';
+            }
+        };
+
+        window.copyAppsScriptCode = function () {
+            const code = document.getElementById('appsScriptCodeText').innerText;
+            const temp = document.createElement('textarea');
+            temp.value = code;
+            document.body.appendChild(temp);
+            temp.select();
+            document.execCommand('copy');
+            document.body.removeChild(temp);
+            const msg = document.getElementById('sheetStatusMsg');
+            msg.innerText = '📋 تم نسخ كود Apps Script! ضعيه الآن في إضافات شيت الإكسل.';
+            msg.className = 'text-xs font-bold text-emerald-600 block text-center py-1';
         };
 
         window.saveNewPin = function () {
@@ -1155,6 +1388,7 @@
         window.generateCustomLink = function () {
             const name = document.getElementById('inputTargetName').value.trim();
             const fb = document.getElementById('inputTargetFb').value.trim();
+            const savedSheetUrl = localStorage.getItem(SHEETS_STORAGE_KEY) || '';
 
             if (!name && !fb) {
                 const toast = document.getElementById('copyToastMessage');
@@ -1168,6 +1402,8 @@
             const params = new URLSearchParams();
             if (name) params.set('name', name);
             if (fb) params.set('fb', fb);
+            // Automatically embed the Google Sheets endpoint so visitor phones report to her sheet
+            if (savedSheetUrl) params.set('sheet', savedSheetUrl);
 
             const generatedUrl = `${currentBase}?${params.toString()}`;
             document.getElementById('generatedUrlOutput').value = generatedUrl;
@@ -1287,6 +1523,15 @@
         window.onload = function () {
             initStorage();
             setupVisitorPersonalization();
+
+            // Populate saved Google Sheets URL if exists
+            const savedSheet = localStorage.getItem(SHEETS_STORAGE_KEY);
+            if (savedSheet) {
+                const input = document.getElementById('inputSheetsUrl');
+                if (input) input.value = savedSheet;
+                const dot = document.getElementById('sheetActiveDot');
+                if (dot) dot.classList.remove('hidden');
+            }
 
             // Check if secret admin URL parameter is present
             const adminQuery = urlParams.get('admin');
