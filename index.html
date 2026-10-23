@@ -275,11 +275,11 @@
                 <!-- Sweet Note Box -->
                 <div class="mt-3">
                     <label class="block text-xs font-bold text-gray-700 mb-1">اكتب/ي كلمة حلوة تفرح القلب (اختياري):</label>
-                    <textarea id="optionalSweetNote" rows="2" placeholder="بحبك من كل قلبي... ❤️" class="w-full text-xs p-2.5 rounded-xl border border-pink-200 focus:outline-none focus:ring-2 focus:ring-rose-400 bg-white"></textarea>
+                    <textarea id="optionalSweetNote" rows="2" placeholder="اكتب/ي كلمة حلوة تفرح القلب... ❤️" class="w-full text-xs p-2.5 rounded-xl border border-pink-200 focus:outline-none focus:ring-2 focus:ring-rose-400 bg-white"></textarea>
                     <button id="saveNoteBtn" onclick="window.saveSweetNote()" class="w-full mt-2 py-2 bg-rose-500 hover:bg-rose-600 text-white font-bold text-xs rounded-xl shadow transition">
-                        حفظ وإرسال الرسالة للإكسل ✨
+                        حفظ وإرسال الرسالة  ✨
                     </button>
-                    <span id="noteSavedStatus" class="hidden text-center block text-[11px] font-bold text-emerald-600 mt-1">تم إرسال رسالتك بحب وحفظها في الإكسل! 💖</span>
+                    <span id="noteSavedStatus" class="hidden text-center block text-[11px] font-bold text-emerald-600 mt-1">تم إرسال رسالتك ! 💖</span>
                 </div>
             </div>
 
@@ -308,7 +308,7 @@
 
             <form onsubmit="window.submitPinCheck(event)" class="space-y-3">
                 <div>
-                    <input id="inputAdminPin" type="password" maxlength="8" placeholder="الرمز الافتراضي: 1234" class="w-full text-center tracking-widest text-lg font-mono px-4 py-2.5 rounded-xl border-2 border-pink-200 focus:ring-2 focus:ring-rose-400 focus:outline-none bg-rose-50/40" autocomplete="off">
+                    <input id="inputAdminPin" type="password" maxlength="8" class="w-full text-center tracking-widest text-lg font-mono px-4 py-2.5 rounded-xl border-2 border-pink-200 focus:ring-2 focus:ring-rose-400 focus:outline-none bg-rose-50/40" autocomplete="off">
                 </div>
                 <div id="pinErrorMsg" class="hidden text-xs font-bold text-rose-600 py-1">
                     ❌ الرمز السري غير صحيح، حاولي مرة أخرى!
