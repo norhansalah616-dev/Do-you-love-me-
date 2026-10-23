@@ -149,7 +149,7 @@
         <!-- ================= QUESTION SCREEN ================= -->
         <div id="questionScreen" class="glass-card rounded-3xl p-6 sm:p-8 text-center transition-all duration-500 relative">
             
-            <!-- Target Personalized Banner (Shown when URL parameters exist) -->
+            <!-- Target Personalized Banner -->
             <div id="personalizedBadge" class="hidden mb-3 inline-flex items-center gap-1 bg-gradient-to-r from-pink-100 to-rose-100 text-rose-700 border border-pink-300 px-4 py-1.5 rounded-full text-xs sm:text-sm font-bold shadow-sm animate-bounce">
                 <span>✨</span>
                 <span>رسالة خاصة موجهة إلى: </span>
@@ -168,59 +168,46 @@
 
                     <!-- Brown Bear: Bubu (Left) -->
                     <g id="bubuCharacter">
-                        <!-- Ears -->
                         <circle cx="65" cy="95" r="16" fill="#b07851" class="ear-wiggle"/>
                         <circle cx="65" cy="95" r="9" fill="#8d5b38"/>
                         <circle cx="115" cy="95" r="16" fill="#b07851" class="ear-wiggle"/>
                         <circle cx="115" cy="95" r="9" fill="#8d5b38"/>
-                        <!-- Head -->
                         <ellipse cx="90" cy="125" rx="36" ry="32" fill="#c48a60"/>
-                        <!-- Blush -->
                         <ellipse cx="70" cy="133" rx="7" ry="4" fill="#ff99aa" opacity="0.85"/>
                         <ellipse cx="110" cy="133" rx="7" ry="4" fill="#ff99aa" opacity="0.85"/>
-                        <!-- Eyes -->
                         <circle cx="78" cy="123" r="3.5" fill="#3a2312"/>
                         <circle cx="102" cy="123" r="3.5" fill="#3a2312"/>
                         <circle cx="77" cy="122" r="1" fill="#ffffff"/>
                         <circle cx="101" cy="122" r="1" fill="#ffffff"/>
-                        <!-- Snout -->
                         <ellipse cx="90" cy="132" rx="10" ry="7" fill="#ebd2be"/>
                         <polygon points="87,130 93,130 90,134" fill="#3a2312"/>
                         <path d="M86 134 Q90 138 94 134" stroke="#3a2312" stroke-width="1.8" stroke-linecap="round" fill="none"/>
-                        <!-- Paws -->
                         <ellipse cx="78" cy="155" rx="8" ry="10" fill="#b07851"/>
                         <ellipse cx="102" cy="155" rx="8" ry="10" fill="#b07851"/>
                     </g>
 
                     <!-- White Panda: Dudu (Right) -->
                     <g id="duduCharacter">
-                        <!-- Ears -->
                         <circle cx="130" cy="95" r="15" fill="#313137" class="ear-wiggle"/>
                         <circle cx="130" cy="95" r="8" fill="#4d4d54"/>
                         <circle cx="178" cy="95" r="15" fill="#313137" class="ear-wiggle"/>
                         <circle cx="178" cy="95" r="8" fill="#4d4d54"/>
-                        <!-- Head -->
                         <ellipse cx="154" cy="125" rx="36" ry="32" fill="#ffffff" stroke="#f0e6eb" stroke-width="1.5"/>
-                        <!-- Panda Eye Patches -->
                         <ellipse cx="142" cy="124" rx="7.5" ry="9" fill="#313137" transform="rotate(-15 142 124)"/>
                         <ellipse cx="166" cy="124" rx="7.5" ry="9" fill="#313137" transform="rotate(15 166 124)"/>
-                        <!-- Eyes sparkles -->
                         <circle cx="143" cy="123" r="2.8" fill="#ffffff"/>
                         <circle cx="165" cy="123" r="2.8" fill="#ffffff"/>
-                        <!-- Blush -->
                         <ellipse cx="134" cy="134" rx="7" ry="4" fill="#ff94b0" opacity="0.85"/>
                         <ellipse cx="174" cy="134" rx="7" ry="4" fill="#ff94b0" opacity="0.85"/>
-                        <!-- Nose & Mouth -->
                         <ellipse cx="154" cy="131" rx="4" ry="2.5" fill="#313137"/>
                         <path d="M151 134 Q154 137 157 134" stroke="#313137" stroke-width="1.6" stroke-linecap="round" fill="none"/>
-                        <!-- Paws -->
                         <ellipse cx="138" cy="154" rx="7.5" ry="9" fill="#313137"/>
                         <ellipse cx="168" cy="154" rx="7.5" ry="9" fill="#313137"/>
                     </g>
                 </svg>
             </div>
 
-            <!-- Question Headings (with Secret Tap on title) -->
+            <!-- Question Headings -->
             <h1 id="questionTitle" onclick="window.handleSecretTap(event)" class="text-2xl sm:text-3xl font-black text-rose-600 mb-1 leading-snug cursor-pointer select-none">
                 Do you love me? 🥺❤️
             </h1>
@@ -236,7 +223,7 @@
                     <span class="text-xs font-normal opacity-90">(Yes!)</span>
                 </button>
 
-                <!-- NO BUTTON (DODGES ON TOUCH & HOVER) -->
+                <!-- NO BUTTON -->
                 <button id="noBtn" class="dodge-btn z-30 px-6 py-3 bg-gray-200 hover:bg-gray-300 text-gray-700 font-bold text-base sm:text-lg rounded-full shadow-md border border-gray-300 cursor-pointer">
                     <span id="noBtnText">لا 💔</span>
                 </button>
@@ -248,14 +235,11 @@
             </p>
         </div>
 
-        <!-- ================= CELEBRATION / SUCCESS SCREEN ================= -->
+        <!-- ================= CELEBRATION SCREEN ================= -->
         <div id="successScreen" class="hidden glass-card rounded-3xl p-6 sm:p-8 text-center transition-all duration-500 transform scale-95 opacity-0">
-            <!-- Mascot Hugging Couple (SVG) -->
             <div class="relative w-48 h-44 sm:w-56 sm:h-48 mx-auto mb-3 flex items-center justify-center">
                 <svg viewBox="0 0 240 200" class="w-full h-full drop-shadow-lg">
-                    <!-- Glowing Heart Background -->
                     <path d="M120 25 C 120 10, 95 -5, 75 -5 C 45 -5, 25 18, 25 50 C 25 95, 80 135, 120 170 C 160 135, 215 95, 215 50 C 215 18, 195 -5, 165 -5 C 145 -5, 120 10, 120 25 Z" fill="#ffd1dc" opacity="0.6"/>
-                    <!-- Hugging Bubu and Dudu -->
                     <g id="huggingPair">
                         <ellipse cx="95" cy="120" rx="35" ry="32" fill="#c48a60"/>
                         <circle cx="75" cy="95" r="14" fill="#b07851"/>
@@ -265,10 +249,8 @@
                         <circle cx="130" cy="95" r="14" fill="#313137"/>
                         <circle cx="165" cy="95" r="14" fill="#313137"/>
                         <path d="M140 115 Q146 110 152 115" stroke="#313137" stroke-width="2.5" stroke-linecap="round" fill="none"/>
-                        <!-- Blush -->
                         <ellipse cx="78" cy="125" rx="7" ry="4" fill="#ff8099"/>
                         <ellipse cx="154" cy="125" rx="7" ry="4" fill="#ff8099"/>
-                        <!-- Heart between them -->
                         <path d="M120 75 C 120 70, 114 64, 107 64 C 98 64, 92 70, 92 78 C 92 91, 107 101, 120 111 C 133 101, 148 91, 148 78 C 148 70, 142 64, 133 64 C 126 64, 120 70, 120 75 Z" fill="#ff2e63"/>
                     </g>
                 </svg>
@@ -281,28 +263,27 @@
                 Yaaay! I knew you loved me! 🎉💖
             </p>
 
-            <!-- Status Confirmation Box -->
             <div class="bg-rose-50 border border-rose-200 rounded-2xl p-4 text-right mb-5 shadow-inner">
                 <div class="flex items-center gap-2 mb-1 text-rose-700 font-bold text-sm">
                     <span>💌</span>
                     <span>تم تسجيل اعترافك بنجاح!</span>
                 </div>
                 <p id="recordedNoteText" class="text-xs text-gray-600 leading-relaxed">
-                    تم تسجيل اختيارك "نعم بحبك" وإرساله لصاحب الرابط مباشرة! 🥰
+                    تم إرسال موافقتك واختيارك "نعم بحبك" إلى ملف الإكسل وسجل المتابعة فوراً! 🥰
                 </p>
 
-                <!-- Optional sweet reply note -->
+                <!-- Sweet Note Box -->
                 <div class="mt-3">
                     <label class="block text-xs font-bold text-gray-700 mb-1">اكتب/ي كلمة حلوة تفرح القلب (اختياري):</label>
                     <textarea id="optionalSweetNote" rows="2" placeholder="بحبك من كل قلبي... ❤️" class="w-full text-xs p-2.5 rounded-xl border border-pink-200 focus:outline-none focus:ring-2 focus:ring-rose-400 bg-white"></textarea>
                     <button id="saveNoteBtn" onclick="window.saveSweetNote()" class="w-full mt-2 py-2 bg-rose-500 hover:bg-rose-600 text-white font-bold text-xs rounded-xl shadow transition">
-                        حفظ وإرسال الرسالة ✨
+                        حفظ وإرسال الرسالة للإكسل ✨
                     </button>
-                    <span id="noteSavedStatus" class="hidden text-center block text-[11px] font-bold text-emerald-600 mt-1">تم إرسال رسالتك بحب وحفظها في السجل! 💖</span>
+                    <span id="noteSavedStatus" class="hidden text-center block text-[11px] font-bold text-emerald-600 mt-1">تم إرسال رسالتك بحب وحفظها في الإكسل! 💖</span>
                 </div>
             </div>
 
-            <!-- Quick WhatsApp Share & Replay Buttons -->
+            <!-- WhatsApp & Replay -->
             <div class="flex flex-col sm:flex-row gap-2 justify-center">
                 <button onclick="window.sendWhatsAppConfirmation()" class="flex-1 py-2.5 px-4 bg-emerald-500 hover:bg-emerald-600 text-white font-bold text-xs sm:text-sm rounded-xl shadow transition flex items-center justify-center gap-1.5">
                     <span>📲</span>
@@ -316,21 +297,21 @@
 
     </main>
 
-    <!-- ================= SECRET PIN ENTRY MODAL (EASTER EGG) ================= -->
+    <!-- ================= SECRET PIN MODAL ================= -->
     <div id="pinModal" class="fixed inset-0 bg-black/60 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
         <div class="bg-white rounded-3xl max-w-sm w-full p-6 shadow-2xl border-2 border-pink-200 text-center animate-in fade-in duration-200">
             <div class="w-14 h-14 bg-pink-100 text-rose-600 rounded-full flex items-center justify-center mx-auto mb-3 text-2xl shadow-inner">
                 🔐
             </div>
             <h3 class="text-lg font-black text-gray-800 mb-1">المنطقة السرية للآدمن</h3>
-            <p class="text-xs text-gray-500 mb-4 font-semibold">أدخل رمز PIN للدخول إلى لوحة التحكم والتتبع</p>
+            <p class="text-xs text-gray-500 mb-4 font-semibold">أدخلي رمز PIN للدخول إلى لوحة التحكم والتتبع</p>
 
             <form onsubmit="window.submitPinCheck(event)" class="space-y-3">
                 <div>
                     <input id="inputAdminPin" type="password" maxlength="8" placeholder="الرمز الافتراضي: 1234" class="w-full text-center tracking-widest text-lg font-mono px-4 py-2.5 rounded-xl border-2 border-pink-200 focus:ring-2 focus:ring-rose-400 focus:outline-none bg-rose-50/40" autocomplete="off">
                 </div>
                 <div id="pinErrorMsg" class="hidden text-xs font-bold text-rose-600 py-1">
-                    ❌ الرمز السري غير صحيح، حاول مرة أخرى!
+                    ❌ الرمز السري غير صحيح، حاولي مرة أخرى!
                 </div>
                 <div class="flex gap-2 pt-1">
                     <button type="submit" class="flex-1 py-2.5 bg-gradient-to-r from-rose-500 to-pink-500 hover:from-rose-600 hover:to-pink-600 text-white font-bold rounded-xl shadow text-xs transition">
@@ -344,7 +325,7 @@
         </div>
     </div>
 
-    <!-- ================= ADMIN & VISITOR TRACKING MODAL ================= -->
+    <!-- ================= ADMIN DASHBOARD MODAL ================= -->
     <div id="adminModal" class="fixed inset-0 bg-black/60 backdrop-blur-sm z-50 hidden flex items-center justify-center p-3 sm:p-4">
         <div class="bg-white rounded-3xl max-w-xl w-full max-h-[92vh] overflow-hidden flex flex-col shadow-2xl border-2 border-pink-200 animate-in fade-in duration-200">
             
@@ -354,7 +335,7 @@
                     <span class="text-2xl">💌</span>
                     <div>
                         <h3 class="font-black text-base sm:text-lg leading-tight">لوحة التحكم وتتبع الزوار (خاصة بك)</h3>
-                        <p class="text-[11px] text-pink-100">سجل الإجابات والرسائل ومزامنة الإكسل</p>
+                        <p class="text-[11px] text-pink-100">سجل الإجابات ورسائل الاعتراف المربوطة بالإكسل</p>
                     </div>
                 </div>
                 <div class="flex items-center gap-2">
@@ -390,11 +371,11 @@
                 <div id="tabTrackContent" class="space-y-3">
                     <div class="flex justify-between items-center bg-pink-50/50 p-2.5 rounded-xl border border-pink-100">
                         <div>
-                            <span class="font-bold text-gray-700 block text-xs">التتبع المباشر للزيارات والرسائل:</span>
-                            <span id="storageModeIndicator" class="text-[10px] text-gray-500 font-mono">حالة التخزين: جاري التحقق...</span>
+                            <span class="font-bold text-gray-700 block text-xs">سجل الزيارات والرسائل المستلمة:</span>
+                            <span id="storageModeIndicator" class="text-[10px] text-emerald-600 font-mono font-bold">متصل بشيت الإكسل بنجاح 🟢</span>
                         </div>
                         <div class="flex items-center gap-2">
-                            <button onclick="window.refreshFromSheet()" class="text-[11px] bg-rose-100 hover:bg-rose-200 text-rose-700 font-bold px-2 py-1 rounded-lg transition flex items-center gap-1">
+                            <button onclick="window.refreshFromSheet()" class="text-[11px] bg-rose-100 hover:bg-rose-200 text-rose-700 font-bold px-2.5 py-1 rounded-lg transition flex items-center gap-1">
                                 <span>🔄</span>
                                 <span>تحديث من الإكسل</span>
                             </button>
@@ -415,7 +396,7 @@
                     <div class="bg-rose-50 border border-rose-200 rounded-xl p-3 text-xs text-rose-800 leading-relaxed">
                         🎯 <strong>توليد رابط نظيف:</strong>
                         <br>
-                        اكتبي اسم الشخص ورابط حسابه على فيسبوك، ثم اضغطي "توليد الرابط". الرابط الناتج يقوم تلقائياً بربط ردّه ورسالته بملف الإكسل الخاص بكِ بدون أن يرى لوحة التحكم.
+                        اكتبي اسم الشخص ورابط حسابه على فيسبوك، ثم اضغطي "توليد الرابط". الرابط الناتج لا يظهر فيه أي زر تحكم نهائياً، ويرسل ردّه مباشرة لملف الإكسل.
                     </div>
 
                     <div>
@@ -445,7 +426,7 @@
                         </div>
                         <div id="copyToastMessage" class="hidden text-xs font-bold text-emerald-600 flex items-center gap-1">
                             <span>✅</span>
-                            <span>تم نسخ الرابط للحافظة! شاركيه معه الآن.</span>
+                            <span>تم نسخ الرابط للحافظة! أرسليه له الآن.</span>
                         </div>
                     </div>
                 </div>
@@ -453,14 +434,14 @@
                 <!-- TAB 3: GOOGLE SHEETS SETUP -->
                 <div id="tabSheetContent" class="hidden space-y-3.5">
                     <div class="bg-emerald-50 border border-emerald-200 rounded-xl p-3 text-xs text-emerald-800 leading-relaxed">
-                        📊 <strong>ربط شيت الإكسل (Google Sheets) لاستقبال الرسائل:</strong>
+                        📊 <strong>رابط شيت الإكسل مفعل وجاهز:</strong>
                         <br>
-                        كل من يفتح الرابط، أو يضغط نعم، أو يكتب رسالة اعتراف ستظهر فوراً في ملف الإكسل حتى لو فتح الرابط من بلد آخر!
+                        تم دمج رابط السكريبت الخاص بكِ مسبقاً، كل من يفتح الرابط أو يكتب رسالة ستصل لشيت الإكسل فوراً.
                     </div>
 
                     <div>
                         <label class="block font-bold text-gray-700 mb-1 text-xs">رابط تطبيق الويب (Google Web App URL):</label>
-                        <input id="inputGoogleSheetUrl" type="text" placeholder="https://script.google.com/macros/s/.../exec" class="w-full px-3.5 py-2.5 rounded-xl border border-pink-200 focus:ring-2 focus:ring-rose-400 focus:outline-none text-xs bg-white font-mono" dir="ltr">
+                        <input id="inputGoogleSheetUrl" type="text" class="w-full px-3.5 py-2.5 rounded-xl border border-pink-200 focus:ring-2 focus:ring-rose-400 focus:outline-none text-xs bg-white font-mono" dir="ltr">
                     </div>
 
                     <div class="flex gap-2">
@@ -474,17 +455,6 @@
                     </div>
 
                     <div id="sheetTestStatus" class="hidden text-xs font-bold py-1"></div>
-
-                    <div class="pt-2 border-t border-pink-100">
-                        <div class="flex justify-between items-center mb-1">
-                            <span class="font-bold text-gray-700 text-xs">كود سكريبت الإكسل المخصص:</span>
-                            <button onclick="window.copyAppsScriptCode()" class="text-rose-600 hover:text-rose-800 font-bold text-xs underline">
-                                📋 نسخ الكود
-                            </button>
-                        </div>
-                        <textarea id="appsScriptCodeArea" readonly rows="5" class="w-full text-[11px] p-2 rounded-xl border border-gray-200 bg-gray-50 font-mono select-all text-left" dir="ltr"></textarea>
-                        <span id="scriptCopyToast" class="hidden text-xs text-emerald-600 font-bold block mt-1">تم نسخ الكود! ضعيه في Apps Script داخل الإكسل.</span>
-                    </div>
                 </div>
 
                 <!-- TAB 4: PIN SECURITY SETTINGS -->
@@ -492,7 +462,7 @@
                     <div class="bg-pink-50 border border-pink-200 rounded-xl p-3 text-xs text-rose-800 leading-relaxed">
                         🛡️ <strong>حماية لوحة التحكم:</strong>
                         <br>
-                        الرمز الافتراضي هو <code>1234</code>. يتم فتح نافذة الدخول بالضغط 3 مرات متتالية وسريعة على رأس الدب والباندا.
+                        الرمز الافتراضي هو <code>1234</code>. يمكنكِ تغييره في أي وقت من هنا. يتم فتح النافذة بالضغط 3 مرات متتالية وسريعة على رأس الدب والباندا.
                     </div>
 
                     <div>
@@ -532,13 +502,13 @@
         </div>
     </div>
 
-    <!-- Application Script (Pure, Robust & Sync-Enabled) -->
+    <!-- Application Script (With Your Google Script URL Embedded) -->
     <script>
         /* ============================================================
            0. CONFIGURATION & CLOUD GOOGLE SHEET INTEGRATION
            ============================================================ */
-        // يمكنكِ وضع رابط Google Apps Script هنا مباشرة بين علامتي التنصيص إذا رغبتِ:
-        let GOOGLE_SHEET_URL = "";
+        // تم دمج رابط جوجل سكربت الخاص بكِ مباشرة هنا:
+        let GOOGLE_SHEET_URL = "https://script.google.com/macros/s/AKfycbyWolunIO0on0vk9JLlyH_FvwqLBOZkH_4rGTUGUNk0ByoV3u_bygP3QP3eAcYy1Fo4vQ/exec";
 
         const LOCAL_STORAGE_KEY = 'love_tracker_visits_backup';
         const SHEET_STORAGE_KEY = 'love_tracker_sheet_url';
@@ -551,8 +521,7 @@
             }
             const saved = localStorage.getItem(SHEET_STORAGE_KEY);
             if (saved && saved.trim()) return saved.trim();
-            if (GOOGLE_SHEET_URL && GOOGLE_SHEET_URL.trim()) return GOOGLE_SHEET_URL.trim();
-            return '';
+            return GOOGLE_SHEET_URL;
         }
 
         function getStoredPin() {
@@ -587,7 +556,6 @@
                 sweetNote: record.sweetNote || document.getElementById('optionalSweetNote')?.value?.trim() || ''
             });
 
-            // Using text/plain ensures simple POST without CORS preflight failures
             fetch(sheetUrl, {
                 method: 'POST',
                 mode: 'no-cors',
@@ -607,7 +575,6 @@
             }
             saveLocalVisits(localList);
 
-            // Send directly to Google Sheet
             sendDataToGoogleSheet(visitData);
         }
 
@@ -1004,7 +971,7 @@
 
             const status = document.getElementById('noteSavedStatus');
             status.classList.remove('hidden');
-            document.getElementById('saveNoteBtn').innerText = 'تم حفظ الرسالة بنجاح ✅';
+            document.getElementById('saveNoteBtn').innerText = 'تم حفظ وإرسال الرسالة للإكسل ✅';
             setTimeout(() => status.classList.add('hidden'), 4000);
         };
 
@@ -1086,7 +1053,7 @@
             document.getElementById('inputGoogleSheetUrl').value = currentSheet;
             const indicator = document.getElementById('storageModeIndicator');
             if (indicator) {
-                indicator.innerText = currentSheet ? 'متصل بشيت الإكسل بنجاح 🟢' : 'محلي (لم يتم ربط شيت الإكسل بعد) ⚠️';
+                indicator.innerText = 'متصل بشيت الإكسل بنجاح 🟢';
             }
         };
 
@@ -1116,21 +1083,15 @@
         window.saveGoogleSheetUrl = function () {
             const url = document.getElementById('inputGoogleSheetUrl').value.trim();
             localStorage.setItem(SHEET_STORAGE_KEY, url);
+            GOOGLE_SHEET_URL = url;
             const statusEl = document.getElementById('sheetTestStatus');
             statusEl.innerText = '✅ تم حفظ رابط الإكسل بنجاح!';
             statusEl.className = 'text-xs font-bold text-emerald-600 block mt-2';
-            const indicator = document.getElementById('storageModeIndicator');
-            if (indicator) indicator.innerText = url ? 'متصل بشيت الإكسل بنجاح 🟢' : 'محلي ⚠️';
         };
 
         window.testSheetConnection = function () {
             const sheetUrl = getActiveSheetUrl();
             const statusEl = document.getElementById('sheetTestStatus');
-            if (!sheetUrl) {
-                statusEl.innerText = '⚠️ يرجى إدخال رابط Google Apps Script أولاً!';
-                statusEl.className = 'text-xs font-bold text-amber-600 block mt-2';
-                return;
-            }
             statusEl.innerText = 'جاري إرسال سطر تجريبي للإكسل... ⏳';
             statusEl.className = 'text-xs font-bold text-blue-600 block mt-2';
 
@@ -1148,13 +1109,8 @@
             }, 1200);
         };
 
-        // Realtime JSONP Fetch from Google Sheet to display rows inside the dashboard
         window.refreshFromSheet = function () {
             const sheetUrl = getActiveSheetUrl();
-            if (!sheetUrl) {
-                alert("يرجى إدخال رابط Google Apps Script أولاً في تبويب 'ربط الإكسل'!");
-                return;
-            }
             const indicator = document.getElementById('storageModeIndicator');
             if (indicator) indicator.innerText = 'جاري جلب البيانات من شيت الإكسل... ⏳';
 
@@ -1184,7 +1140,7 @@
             const separator = sheetUrl.includes('?') ? '&' : '?';
             script.src = `${sheetUrl}${separator}callback=${callbackName}&_t=${Date.now()}`;
             script.onerror = function () {
-                if (indicator) indicator.innerText = 'تعذر الجلب المباشر (يمكنك فتح شيت الإكسل مباشرة) ⚠️';
+                if (indicator) indicator.innerText = 'تعذر الجلب المباشر (يمكنك مراجعة شيت الإكسل مباشرة) ⚠️';
             };
             document.body.appendChild(script);
         };
@@ -1273,7 +1229,7 @@
                     <div class="text-center py-10 text-gray-400">
                         <span class="text-4xl block mb-2">📭</span>
                         <p class="font-bold text-gray-500">لا توجد زيارات مسجلة بعد</p>
-                        <p class="text-[11px] text-gray-400 mt-1">تأكدي من ربط الإكسل وتوليد رابط للشخص!</p>
+                        <p class="text-[11px] text-gray-400 mt-1">تأكدي من توليد رابط للشخص من تبويب "مولّد الروابط"!</p>
                     </div>
                 `;
                 return;
@@ -1337,92 +1293,7 @@
             return div.innerHTML;
         }
 
-        /* Apps Script code template populated for easy 1-click copying */
-        const appsScriptTemplate = `function doPost(e) {
-  try {
-    var sheet = SpreadsheetApp.getActiveSpreadsheet().getActiveSheet();
-    var data = JSON.parse(e.postData.contents);
-    var sessionId = data.sessionId || "";
-    
-    if (sheet.getLastRow() === 0) {
-      sheet.appendRow(["التاريخ والوقت", "اسم الشخص", "رابط فيسبوك", "الحالة", "محاولات الهروب (لا)", "رسالة الزائر 💌", "معرف الجلسة"]);
-      sheet.getRange(1, 1, 1, 7).setFontWeight("bold").setBackground("#ffe6ee");
-    }
-
-    var values = sheet.getDataRange().getValues();
-    var rowIndex = -1;
-    for (var i = 1; i < values.length; i++) {
-      if (values[i][6] && values[i][6] == sessionId) {
-        rowIndex = i + 1;
-        break;
-      }
-    }
-
-    var dateStr = Utilities.formatDate(new Date(), Session.getScriptTimeZone() || "GMT+2", "yyyy-MM-dd HH:mm:ss");
-    var rowData = [
-      dateStr,
-      data.targetName || "زائر مجهول",
-      data.facebookLink || "غير محدد",
-      data.status || "زيارة",
-      data.noDodgeCount || 0,
-      data.sweetNote || "",
-      sessionId
-    ];
-
-    if (rowIndex > 0) {
-      if (!data.sweetNote && values[rowIndex - 1][5]) {
-        rowData[5] = values[rowIndex - 1][5];
-      }
-      sheet.getRange(rowIndex, 1, 1, rowData.length).setValues([rowData]);
-    } else {
-      sheet.appendRow(rowData);
-    }
-
-    return ContentService.createTextOutput(JSON.stringify({ status: "success" })).setMimeType(ContentService.MimeType.JSON);
-  } catch (err) {
-    return ContentService.createTextOutput(JSON.stringify({ status: "error", error: err.toString() })).setMimeType(ContentService.MimeType.JSON);
-  }
-}
-
-function doGet(e) {
-  try {
-    var sheet = SpreadsheetApp.getActiveSpreadsheet().getActiveSheet();
-    var rows = sheet.getDataRange().getValues();
-    var result = [];
-    if (rows.length > 1) {
-      for (var i = 1; i < rows.length; i++) {
-        result.push({
-          visitTime: rows[i][0],
-          targetName: rows[i][1],
-          facebookLink: rows[i][2],
-          status: rows[i][3],
-          noDodgeCount: rows[i][4],
-          sweetNote: rows[i][5],
-          sessionId: rows[i][6]
-        });
-      }
-    }
-    var callback = e ? e.parameter.callback : null;
-    var jsonOutput = JSON.stringify(result);
-    if (callback) {
-      return ContentService.createTextOutput(callback + '(' + jsonOutput + ')').setMimeType(ContentService.MimeType.JAVASCRIPT);
-    }
-    return ContentService.createTextOutput(jsonOutput).setMimeType(ContentService.MimeType.JSON);
-  } catch (err) {
-    return ContentService.createTextOutput("[]").setMimeType(ContentService.MimeType.JSON);
-  }
-}`;
-
-        window.copyAppsScriptCode = function () {
-            navigator.clipboard.writeText(appsScriptTemplate).then(() => {
-                const toast = document.getElementById('scriptCopyToast');
-                toast.classList.remove('hidden');
-                setTimeout(() => toast.classList.add('hidden'), 3500);
-            });
-        };
-
         window.onload = function () {
-            document.getElementById('appsScriptCodeArea').value = appsScriptTemplate;
             setupVisitorPersonalization();
             renderVisitorsUI(getLocalVisits());
 
